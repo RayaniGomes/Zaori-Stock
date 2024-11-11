@@ -1,8 +1,10 @@
 'use client';
+import Home from "./home/page";
 
-export default function Home() {
+export default function Principal() {
   return (
     <main>
+      <Home />
     </main>
   );
 }

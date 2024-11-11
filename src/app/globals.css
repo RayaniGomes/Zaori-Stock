@@ -21,22 +21,27 @@ html{
 
 h2 {
   font-size: 32px;
+  font-weight: 400;
 }
 
 h3 {
   font-size: 24px;
+  font-weight: 500;
 }
 
 h4 {
   font-size: 16px;
+  font-weight: 400;
 }
 
 h5 {
   font-size: 14px;
+  font-weight: 400;
 }
 
 p {
   font-size: 12px;
+  font-weight: 400;
 } 
 
 
@@ -74,16 +79,3 @@ p {
   }
 }
 
-.link {
-  color: var(--white);
-  text-decoration: none;
-  font-size: 14px;
-  font-weight: 500;
-  padding: .5rem 1rem;
-  border-radius: .625rem;
-
-  &:hover {
-    background: var(--gradient);
-    color: var(--dark);
-  }
-}
