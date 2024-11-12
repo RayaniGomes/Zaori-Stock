@@ -20,32 +20,32 @@ html{
 }
 
 h2 {
-  font-size: 32px;
-  font-weight: 400;
+  font-size: 32px !important;
+  font-weight: 400 !important;
 }
 
 h3 {
-  font-size: 24px;
-  font-weight: 500;
+  font-size: 24px !important;
+  font-weight: 500 !important;
 }
 
 h4 {
-  font-size: 16px;
-  font-weight: 400;
+  font-size: 16px !important;
+  font-weight: 400 !important;
 }
 
 h5 {
-  font-size: 14px;
-  font-weight: 400;
+  font-size: 14px !important;
+  font-weight: 400 !important;
 }
 
 p {
-  font-size: 12px;
-  font-weight: 400;
+  font-size: 12px !important;
+  font-weight: 400 !important;
 } 
 
 
-.bnt-primary {
+.bntPrincipal {
   width: 7.5rem;
   height: 2.5rem;
   font-size: 14px;
@@ -62,7 +62,7 @@ p {
   }
 }
 
-.bnt-secondary {
+.bntSecondario {
   width: 7.5rem;
   height: 2.5rem;
   font-size: 14px;
@@ -79,3 +79,22 @@ p {
   }
 }
 
+:focus {
+  outline: 0;
+}
+
+.nav-link {
+  background-color: var(--white) !important;
+  padding: .25rem .5rem !important;
+  border-radius: .625rem ;
+}
+
+.dropdown-item.active,.dropdown-item:active {
+  color: var(--dark) !important;
+  background: var(--gradient) !important;
+}
+
+.dropdown-item:focus,.dropdown-item:hover {
+  color: var(--dark);
+  background: var(--gradient)
+}

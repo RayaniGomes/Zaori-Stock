@@ -1,19 +1,21 @@
 'use client';
 import Navbar from "@/(components)/navbar";
-import { Main, SectionContador } from "./styled";
+import { MainContainer, SectionContador } from "./styled";
 import Contador from "@/(components)/contador";
+import Filtro from "@/(components)/filtro";
 
 export default function Home() {
   return (
-    <main>
+    <>
       <Navbar />
-      <Main>
+      <MainContainer>
         <SectionContador>
           <Contador title="Produtos no estoque" cont={1000} />
           <Contador title="Produtos no estoque" cont={1000} />
           <Contador title="Produtos no estoque" cont={1000} />
         </SectionContador>
-      </Main>
-    </main>
+        <Filtro />
+      </MainContainer>
+    </>
   );
 }

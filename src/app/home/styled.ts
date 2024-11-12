@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Main = styled.main`
+export const MainContainer = styled.section`
     position: fixed;
     top: 0;
     right: 0;
