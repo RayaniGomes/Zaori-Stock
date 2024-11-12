@@ -14,9 +14,9 @@ export default function Filtro() {
                 <CategoriaDropdown />
                 <MovimentacaoDropdown />
             </Left>
-            <button className="bntPrincipal">
+            <a className="bntPrincipal">
                 Novo produto
-            </button>
+            </a>
         </ContainerFiltro>
     );
 }
