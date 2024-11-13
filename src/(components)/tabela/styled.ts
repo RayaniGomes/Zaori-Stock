@@ -10,7 +10,6 @@ export const SectionTabela = styled.section`
         border-radius: .625rem;
         overflow: hidden;
         
-
         thead {
             width: 100%;
 
@@ -22,9 +21,9 @@ export const SectionTabela = styled.section`
                 background-color: var(--dark);
                 
                 th {
+                    width: 150px;
                     background-color: var(--dark);
                     color: var(--white);
-                    width: 200px;
                     font-size: 16px;
                     font-weight: 400;
                     border: none;
@@ -51,7 +50,7 @@ export const SectionTabela = styled.section`
                 border-bottom: 1px solid #3B36334D;
                 
                 td {
-                    width: 200px;
+                    width: 150px;
                     font-size: 14px;
                     font-weight: 400;
                     border: none;
@@ -115,6 +114,10 @@ export const SectionTabela = styled.section`
         align-items: center;
         gap: .5rem;
         padding: 0rem .25rem;
+    }
+
+    .descricao {
+        width: 200px;
     }
     
     .bi-arrow-down {

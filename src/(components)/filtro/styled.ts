@@ -11,11 +11,16 @@ export const ContainerFiltro = styled.section`
     background-color: var(--dark);
     gap: 1rem;
     box-shadow: var(--drop-shadow);
+
 `
 
 export const Left = styled.div`
     display: flex;
     gap: 2rem;
+
+    @media (max-width: 768px) {
+        gap: .5rem;
+    }
 `
 
 export const Pesquisar = styled.div`
@@ -35,6 +40,14 @@ export const Pesquisar = styled.div`
         font-size: 16px;
         font-weight: 400;
     }
+
+    @media (max-width: 768px) {
+        width: 100%;
+
+        input {
+            width: 100%;
+        }
+    }
 `
 
 export const Dropdown = styled.button`
@@ -46,6 +59,10 @@ export const Dropdown = styled.button`
     border-radius: .625rem;
     background-color: var(--white);
     cursor: pointer;
+
+    @media (max-width: 768px) {
+        width: 100%;
+    }
 `
 
 export const Option = styled.div`

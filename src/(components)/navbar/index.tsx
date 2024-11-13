@@ -1,32 +1,44 @@
 import Image from "next/image";
-import { Menu, Nav } from "./styled";
+import { ButtonMenuHamburger, Logo, Menu, Nav } from "./styled";
+import { useState } from "react";
+import Link from "next/link";
 
 export default function Navbar() {
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+    const toggleMenu = () => {
+        setIsMenuOpen(!isMenuOpen);
+    };
+    
+
     return (
         <Nav>
-            <a href="/app/page">
+            <Logo href="/app/page">
                 <Image 
                     width={183} 
                     height={61} 
+                    objectFit="cover"
                     src="./logo.svg" 
                     alt="logo da Zaori Stock" 
                 />
-            </a>
+            </Logo>
 
-            <Menu>
-                <a href="/app/page">
+            <Menu className={isMenuOpen ? 'open' : ''}>
+                <Link href="/">
                     <i className="bi bi-grid" />
                     Home
-                </a>
-                <a href="" >
+                </Link>
+                <Link href="" >
                     <i className="bi bi-boxes" />
                     Produtos
-                </a>
-                <a href="" >
+                </Link>
+                <Link href="" >
                     <i className="bi bi-tags" />
                     Novo Produto
-                </a>
+                </Link>
             </Menu>
+            
+            <ButtonMenuHamburger className={isMenuOpen ? 'bi bi-x' : 'bi bi-list'} onClick={toggleMenu} />
         </Nav>
     )    
 }
