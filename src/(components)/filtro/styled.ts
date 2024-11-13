@@ -1,6 +1,5 @@
 import styled from "styled-components";
 
-
 export const ContainerFiltro = styled.section`
     width: 100%;
     display: flex;
@@ -11,6 +10,7 @@ export const ContainerFiltro = styled.section`
     padding: 1rem;
     background-color: var(--dark);
     gap: 1rem;
+    box-shadow: var(--drop-shadow);
 `
 
 export const Left = styled.div`
