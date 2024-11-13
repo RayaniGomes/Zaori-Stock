@@ -1,55 +1,76 @@
 import { Table } from "react-bootstrap";
-import { Categoria, Data, Descricao, Nome, Preco, Quantidade, SectionTabela, Status, Titulo } from "./styled";
+import { SectionTabela } from "./styled";
 
 export default function Tabela() {
     return (
         <SectionTabela>
-            <Titulo>Últimas movimentações</Titulo>
-            <Table>
+            <Table responsive>
                 <thead>
-                    <Status></Status>
-                    <Data>Data</Data>
-                    <Nome>Nome</Nome>
-                    <Descricao>Descrição</Descricao>
-                    <Preco>
-                        Preço
-                        <button className="bi bi-arrow-down-up" />
-                    </Preco>
-                    <Categoria>Categoria</Categoria>
-                    <Quantidade>
-                        Quantidade
-                        <button className="bi bi-arrow-down-up" />
-                    </Quantidade>
-                    <Status></Status>
-                    <Status></Status>
+                    <tr>
+                        <th className="status"></th>
+                        <th>Data</th>
+                        <th>Nome</th>
+                        <th>Descrição</th>
+                        <th>
+                            Preço
+                            <button className="bi bi-arrow-down-up" />
+                        </th>
+                        <th>Categoria</th>
+                        <th>
+                            Quantidade
+                            <button className="bi bi-arrow-down-up" />
+                        </th>
+                        <th className="status"></th>
+                    </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <Status>
+                        <td className="status">
                             <i className="bi bi-arrow-down" />
-                        </Status>
-                        <Data>20/20/2020</Data>
-                        <Nome>Lorem ipsum</Nome>
-                        <Descricao>Lorem ipsum dolor sit amet consectetur.</Descricao>
-                        <Preco>R$ 1062,00</Preco>
-                        <Categoria>Lorem ipsum</Categoria>
-                        <Quantidade>100</Quantidade>
-                        <Status>
+                        </td>
+                        <td >20/20/2020</td>
+                        <td >Lorem ipsum</td>
+                        <td >Lorem ipsum dolor sit amet consectetur.</td>
+                        <td >R$ 1062,00</td>
+                        <td >Lorem ipsum</td>
+                        <td >100</td>
+                        <td className="status">
                             <a href="">
                                 <i className="bi bi-pencil-square" />
                             </a>
-                        </Status>
-                        <Status>
                             <button>
-                                <i className="bi bi-trash"/>
+                                <i className="bi bi-trash" />
                             </button>
-                        </Status>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td className="status">
+                            <i className="bi bi-arrow-down" />
+                        </td>
+                        <td >20/20/2020</td>
+                        <td >Lorem ipsum</td>
+                        <td >Lorem ipsum dolor sit amet consectetur.</td>
+                        <td >R$ 1062,00</td>
+                        <td >Lorem ipsum</td>
+                        <td >100</td>
+                        <td className="status">
+                            <a href="">
+                                <i className="bi bi-pencil-square" />
+                            </a>
+                            <button>
+                                <i className="bi bi-trash" />
+                            </button>
+                        </td>
                     </tr>
                 </tbody>
                 <tfoot>
-                    <button className="bi bi-chevron-double-left" />
-                    <h5>Página 1 de 145</h5>
-                    <button className="bi bi-chevron-double-right" />
+                    <tr>
+                        <td>
+                            <button className="bi bi-chevron-double-left" />
+                            Página 1 de 145
+                            <button className="bi bi-chevron-double-right" />
+                        </td>
+                    </tr>
                 </tfoot>
             </Table>
         </SectionTabela>
