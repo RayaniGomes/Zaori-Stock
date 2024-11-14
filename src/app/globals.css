@@ -52,6 +52,9 @@ p {
 } 
 
 .bntPrincipal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 7.5rem;
   height: 2.5rem;
   font-size: 14px;
@@ -73,6 +76,9 @@ p {
 }
 
 .bntSecondario {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 7.5rem;
   height: 2.5rem;
   font-size: 14px;
@@ -93,24 +99,20 @@ p {
   outline: 0;
 }
 
-.nav-link {
-  background-color: var(--white) !important;
-  padding: .25rem .5rem !important;
-  border-radius: .625rem ;
+/* @media (max-width: 768px) {
+  .bntPrincipal, .bntSecondario {
+    width: 3.75rem;
+    text-align: center;
+    font-size: 12px;
+    line-height: 12px;
+  }
 }
-
-.dropdown-item.active,.dropdown-item:active {
-  color: var(--dark) !important;
-  background: var(--gradient) !important;
-}
-
-.dropdown-item:focus,.dropdown-item:hover {
-  color: var(--dark);
-  background: var(--gradient)
-}
-
+*/
 @media (max-width: 768px) {
-  .bntPrincipal {
+  .bntPrincipal, .bntSecondario {
     width: 100%;
+    font-size: 12px;
+    padding: .25rem;
+    text-align: center;
   }
 }

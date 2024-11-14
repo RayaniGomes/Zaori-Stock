@@ -7,7 +7,7 @@ export const Nav = styled.nav`
     background-color: var(--dark);
     padding: 32px;
 
-    @media (max-width: 768px) {
+    @media (max-width: 840px) {
         flex-direction: row;
         align-items: center;
         justify-content: space-between;
@@ -20,7 +20,7 @@ export const Nav = styled.nav`
 `
 
 export const Logo = styled.a`
-    @media (max-width: 768px) {
+    @media (max-width: 840px) {
         img {
             width: 80%;
             height: 80%;
@@ -36,7 +36,7 @@ export const Menu = styled.div`
     gap: 32px;
     margin-top: 10rem;
 
-    @media (max-width: 768px) {
+    @media (max-width: 840px) {
         position: absolute;
         width: 50%;
         height: 100vh;
@@ -100,7 +100,7 @@ export const ButtonMenuHamburger = styled.button`
     justify-content: center;
     border-radius: 7px;
 
-    @media (max-width: 768px) {
+    @media (max-width: 840px) {
         display: flex;
     }
 `

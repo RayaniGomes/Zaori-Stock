@@ -9,7 +9,7 @@ export default function Filtro() {
             <Left>
                 <Pesquisar>
                     <input type="search" placeholder="Pesquisar.." />
-                    <i className="bi bi-search" />
+                    <button className="bi bi-search" />
                 </Pesquisar>
                 <CategoriaDropdown />
                 <MovimentacaoDropdown />

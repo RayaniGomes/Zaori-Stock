@@ -6,7 +6,7 @@ export const ContainerHome = styled.section`
     width: 100%;
     height: 100vh;
 
-    @media (max-width: 768px) {
+    @media (max-width: 840px) {
         grid-template-columns: 1fr;
     }
 `
@@ -30,9 +30,10 @@ export const Container = styled.section`
         margin-bottom: 1rem;
     }
 
-    @media (max-width: 768px) {
+    @media (max-width: 840px) {
         position: fixed;
         top: 5rem;
+        padding: 2rem 1rem;
         border-radius: 50px 50px 0 0;
         box-shadow: 0px 10px 15px 0px #00000040 inset;
         overflow-y: auto;
