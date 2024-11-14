@@ -17,9 +17,8 @@ export default function Home() {
             <Contador title="Produtos no estoque" cont={1000} />
           </SectionContador>
           <Filtro />
-          {/* 
           <h3>Últimas movimentações</h3>
-          <Tabela /> */}
+          <Tabela />
         </Container>
       </SessaoMain>
     </ContainerHome>

@@ -5,14 +5,19 @@ export const SectionTabela = styled.section`
     height: auto;
     border-radius: .625rem;
     
+    .tabela {
+        max-width: 1200px; 
+        overflow: auto;
+    }
+    
     table {
+        min-width: 1090px;
+        max-width: 1200px;
         width: 100%;
         border-radius: .625rem;
         overflow: hidden;
         
         thead {
-            width: 100%;
-
             tr {
                 display: flex;
                 padding: .5rem;
@@ -77,34 +82,40 @@ export const SectionTabela = styled.section`
                 }
             }
             
-        }
+        }    
+    }
+    .footerTable {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--dark);
+        color: var(--white);
+        padding: .25rem .5rem;
+        font-size: 14px;
 
-        tfoot {
+        & tr{
             display: flex;
-            justify-content: center;
-            background-color: var(--dark);
-            color: var(--white);
-            padding: .25rem .5rem;
-            font-size: 14px;
-
-            tr{
-                td {
-                    display: flex;
-                    align-items: center;
-                    gap: 1rem;
-                    background-color: var(--dark);
-                    color: var(--white);
-                    border: none;
-                    
-                    button {
-                        background-color: transparent;
-                        border: none;
-                        color: var(--white);
-                        font-size: 18px;
-                        cursor: pointer;
-                    }
-                }
+            align-items: center;
+            
+            td {
+                width: 200px ;
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+                background-color: var(--dark);
+                color: var(--white);
+                border: none;
+                
             }
+        }
+        button {
+            background-color: transparent;
+            border: none;
+            color: var(--white) !important;
+            font-size: 18px;
+            cursor: pointer;
+            padding: 0 .5rem;
         }
     }
 

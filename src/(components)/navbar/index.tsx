@@ -17,9 +17,9 @@ export default function Navbar() {
                 <Image 
                     width={183} 
                     height={61} 
-                    objectFit="cover"
                     src="./logo.svg" 
-                    alt="logo da Zaori Stock" 
+                    alt="logo da Zaori Stock"
+                    priority 
                 />
             </Logo>
 

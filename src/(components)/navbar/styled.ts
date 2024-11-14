@@ -16,6 +16,7 @@ export const Nav = styled.nav`
         position: fixed;
         top: 0;
         z-index: 1000;
+        padding: 1rem;
     }
 `
 
@@ -50,7 +51,7 @@ export const Menu = styled.div`
         justify-content: flex-start;
         gap: 1rem;
         padding: 0 1rem;
-        transition: all 0.8s ease-in-out;
+        transition: transform 0.8s ease-in-out, opacity 0s;
         transform: translateX(100%);
         opacity: 0;
         pointer-events: none;
