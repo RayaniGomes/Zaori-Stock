@@ -95,13 +95,13 @@ export const Left = styled.div`
         gap: .5rem;
     }
 
-    @media (max-width: 470px) {
+    @media (max-width: 500px) {
         width: 100%;
         display: flex;
         justify-content: space-between;
     }
 
-    @media (max-width: 475px) {
+    @media (max-width: 320px) {
         flex-wrap: wrap;
     }
 `

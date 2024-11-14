@@ -99,20 +99,23 @@ p {
   outline: 0;
 }
 
-/* @media (max-width: 768px) {
-  .bntPrincipal, .bntSecondario {
-    width: 3.75rem;
-    text-align: center;
-    font-size: 12px;
-    line-height: 12px;
-  }
-}
-*/
 @media (max-width: 768px) {
   .bntPrincipal, .bntSecondario {
     width: 100%;
     font-size: 12px;
     padding: .25rem;
     text-align: center;
+  }
+
+  h2 {
+    font-size: 24px !important;
+  }
+
+  h3 {
+    font-size: 20px !important;
+  }
+
+  h5{
+    font-size: 12px !important;
   }
 }

@@ -14,4 +14,13 @@ export const ContadorContainer = styled.div`
     h2 {
         text-align: center;
     }
+
+    @media (max-width: 1024px) {
+        width: 100%;
+        height: 100%;
+    }
+
+    @media (max-width: 768px) {
+        gap: 0rem;
+    }
 `
