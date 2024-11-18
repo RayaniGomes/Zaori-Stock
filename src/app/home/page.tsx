@@ -1,16 +1,17 @@
 'use client';
 import Navbar from "@/(components)/navbar";
-import { Container, ContainerHome, SectionContador, SessaoMain } from "./styled";
+import { SectionContador } from "./styled";
 import Contador from "@/(components)/contador";
 import Filtro from "@/(components)/filtro";
-import Tabela from "@/(components)/tabela";
+import Tabela from "@/(components)/tabelas/movimentacoes";
+import { Container, ContainerMain, Main } from "../styled";
 
 export default function Home() {
   return (
-    <ContainerHome>
+    <Container>
       <Navbar />
-      <SessaoMain>
-        <Container>
+      <Main>
+        <ContainerMain>
           <SectionContador>
             <Contador title="Produtos no estoque" cont={1000} />
             <Contador title="Produtos no estoque" cont={1000} />
@@ -19,8 +20,8 @@ export default function Home() {
           <Filtro />
           <h3>Últimas movimentações</h3>
           <Tabela />
-        </Container>
-      </SessaoMain>
-    </ContainerHome>
+        </ContainerMain>
+      </Main>
+    </Container>
   );
 }
