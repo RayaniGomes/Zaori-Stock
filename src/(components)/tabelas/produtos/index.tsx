@@ -1,5 +1,4 @@
-import { Table } from "react-bootstrap";
-import { SectionTabela } from "./styled";
+import { SectionTabela } from "../styled";
 
 export default function Tabela() {
     return (
@@ -8,7 +7,7 @@ export default function Tabela() {
                 <table>
                     <thead>
                         <tr>
-                            <th className="status"></th>
+                            <th className="status" />
                             <th>Data</th>
                             <th>Nome</th>
                             <th className="descricao">Descrição</th>
@@ -26,9 +25,7 @@ export default function Tabela() {
                     </thead>
                     <tbody>
                         <tr>
-                            <td className="status">
-                                <i className="bi bi-arrow-down" />
-                            </td>
+                            <td className="status" />
                             <td >20/20/2020</td>
                             <td >Lorem ipsum</td>
                             <td className="descricao">Lorem ipsum dolor sit amet consectetur.</td>

@@ -1,3 +1,4 @@
+'use client';
 import Image from "next/image";
 import { ButtonMenuHamburger, Logo, Menu, Nav } from "./styled";
 import { useState } from "react";
@@ -28,11 +29,11 @@ export default function Navbar() {
                     <i className="bi bi-grid" />
                     Home
                 </Link>
-                <Link href="" >
+                <Link href="/produtos" >
                     <i className="bi bi-boxes" />
                     Produtos
                 </Link>
-                <Link href="" >
+                <Link href="/cadastrar" >
                     <i className="bi bi-tags" />
                     Novo Produto
                 </Link>
