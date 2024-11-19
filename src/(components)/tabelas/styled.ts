@@ -80,8 +80,9 @@ export const SectionTabela = styled.section`
                 }
             }
             
-        }    
+        }   
     }
+
     .footerTable {
         width: 100%;
         display: flex;
@@ -92,20 +93,20 @@ export const SectionTabela = styled.section`
         padding: .25rem .5rem;
         font-size: 14px;
 
-        & tr{
+        tr{
+            display: flex;
+            align-items: center;    
+        }
+        td {
+            width: 100%;
             display: flex;
             align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            background-color: var(--dark);
+            color: var(--white);
+            border: none;
             
-            td {
-                width: 200px ;
-                display: flex;
-                align-items: center;
-                gap: 1rem;
-                background-color: var(--dark);
-                color: var(--white);
-                border: none;
-                
-            }
         }
         button {
             background-color: transparent;

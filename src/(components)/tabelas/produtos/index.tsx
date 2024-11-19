@@ -1,10 +1,11 @@
+import { Table } from "react-bootstrap";
 import { SectionTabela } from "../styled";
 
 export default function Tabela() {
     return (
         <SectionTabela>
             <div className="tabela">
-                <table>
+                <Table>
                     <thead>
                         <tr>
                             <th className="status" />
@@ -41,15 +42,15 @@ export default function Tabela() {
                                 </button>
                             </td>
                         </tr>
-                    </tbody>
                         <tr className="footerTable">
-                            <td>
+                            <td colSpan={8}>
                                 <button className="bi bi-chevron-double-left" />
                                 Página 1 de 145
                                 <button className="bi bi-chevron-double-right" />
                             </td>
                         </tr>
-                </table>
+                    </tbody>
+                </Table>
             </div>
         </SectionTabela>
     )
