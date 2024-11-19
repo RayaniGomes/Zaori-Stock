@@ -97,6 +97,8 @@ export const CampoButtons = styled.div`
     margin-top: 5rem;
 
     @media (max-width: 768px) {
+        width: 80%;
+        margin: 0 auto;
         margin-top: 2rem;
     }
 `
