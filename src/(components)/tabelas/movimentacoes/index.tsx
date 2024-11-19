@@ -36,7 +36,7 @@ export default function Tabela() {
                             <td >Lorem ipsum</td>
                             <td >100</td>
                             <td className="status">
-                                <a href="">
+                                <a href="/informacoes">
                                     <i className="bi bi-pencil-square" />
                                 </a>
                                 <button>
