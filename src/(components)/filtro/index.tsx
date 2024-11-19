@@ -14,7 +14,7 @@ export default function Filtro() {
                 <CategoriaDropdown />
                 <MovimentacaoDropdown />
             </Left>
-            <a className="bntPrincipal">
+            <a href="/cadastrar" className="bntPrincipal">
                 Novo produto
             </a>
         </ContainerFiltro>

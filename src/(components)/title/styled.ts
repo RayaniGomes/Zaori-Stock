@@ -5,12 +5,13 @@ export const TitleWapper = styled.section`
     align-items: center;
     gap: .5rem;
 
-    a {
+    button {
         color: var(--dark);
         background: var(--gradient);
         font-size: 20px;
         border-radius: 10px;
-        padding: .2rem .5rem;   
+        padding: .2rem .5rem; 
+        border: none;
     }
     h2 {
         margin-bottom: 0 !important;
