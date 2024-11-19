@@ -43,6 +43,11 @@ export const Tabela = styled.table`
             align-items: center;
             gap: 2rem;
             padding: 0 1rem;
+            font-size: 14px;
         }
+    }
+
+    .bi-arrow-down, .bi-arrow-up {
+        font-size: 16px;
     }
 `

@@ -11,7 +11,7 @@ export default function Informacoes() {
             <Navbar />
             <Main>
                 <ContainerMain>
-                    <Title title="Cadastrar Produto" />
+                    <Title title="Informações do Produto" />
                     <ContainerBody>
                         <div className="col">
                             <Forms />

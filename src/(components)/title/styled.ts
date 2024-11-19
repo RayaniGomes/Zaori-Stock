@@ -10,11 +10,23 @@ export const TitleWapper = styled.section`
         background: var(--gradient);
         font-size: 20px;
         border-radius: 10px;
-        padding: .2rem .5rem; 
+        padding: .5rem; 
         border: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
     h2 {
         margin-bottom: 0 !important;
     }
 
+    @media (max-width: 768px) {
+        button {
+            font-size: 15px;
+        }
+    }
+
+    @media (max-width: 320px) {
+        align-items: flex-start;
+    }
 `
