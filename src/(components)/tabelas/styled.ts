@@ -129,14 +129,4 @@ export const SectionTabela = styled.section`
     .descricao {
         width: 200px;
     }
-    
-    .bi-arrow-down {
-        color: var(--red);
-        font-size: 20px;
-    }
-
-    .bi-arrow-up {
-        color: var(--green);
-        font-size: 20px;
-    }
 `
