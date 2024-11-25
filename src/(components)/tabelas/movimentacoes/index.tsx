@@ -32,6 +32,17 @@ export default function Tabela() {
         }
     };
 
+    const fomatarData = (date: string) => {
+        const data = new Date(date); 
+        const dia = data.getDate().toString();
+        const diaF = (dia.length == 1) ? '0'+dia : dia;
+        const mes = (data.getMonth()+1).toString(); 
+        const mesF = (mes.length == 1) ? '0'+mes : mes;
+        const anoF = data.getFullYear();
+    
+        return diaF+"/"+mesF+"/"+anoF ;
+    };
+
     return (
         <SectionTabela>
             <div className="tabela">
@@ -60,7 +71,7 @@ export default function Tabela() {
                                 <td className="status">
                                     {movimentacao.reason === "IN" ? <i className="bi bi-arrow-down" /> : <i className="bi bi-arrow-up" />}
                                 </td>
-                                <td>{movimentacao.created_at}</td>
+                                <td>{fomatarData(movimentacao.created_at)}</td>
                                 <td>
                                     {movimentacao.product.name}
                                 </td>
