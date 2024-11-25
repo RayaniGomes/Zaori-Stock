@@ -22,6 +22,7 @@ export const SectionTabela = styled.section`
                 align-items: center;
                 justify-content: space-between;
                 background-color: var(--dark);
+                padding: .5rem 1rem;
                 
                 th {
                     width: 150px;
@@ -51,6 +52,7 @@ export const SectionTabela = styled.section`
                 display: flex;
                 justify-content: space-between;
                 border-bottom: 1px solid #3B36334D;
+                padding: 0 1rem;
                 
                 td {
                     width: 150px;
@@ -92,7 +94,7 @@ export const SectionTabela = styled.section`
         color: var(--white);
         padding: .25rem .5rem;
         font-size: 14px;
-
+        
         tr{
             display: flex;
             align-items: center;    
@@ -106,7 +108,6 @@ export const SectionTabela = styled.section`
             background-color: var(--dark);
             color: var(--white);
             border: none;
-            
         }
         button {
             background-color: transparent;
@@ -119,11 +120,18 @@ export const SectionTabela = styled.section`
     }
 
     .status {
-        width: 60px;
+        width: 10px;
         display: flex;
         align-items: center;
         gap: .5rem;
-        padding: 0rem .25rem;
+        padding: 0rem 1rem;
+    }
+
+    .botoes{
+        width: 100px;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
     }
 
     .descricao {

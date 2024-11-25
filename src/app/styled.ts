@@ -20,6 +20,7 @@ export const Main = styled.section`
 export const ContainerMain = styled.section`
     width: 100%;
     height: 100%;
+    overflow-y: auto;
     padding: 5rem 2rem;
     border-radius: 50px 0 0 50px;
     background-color: var(--white);
