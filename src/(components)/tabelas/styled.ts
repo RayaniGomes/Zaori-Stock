@@ -138,3 +138,4 @@ export const SectionTabela = styled.section`
         width: 200px;
     }
 `
+

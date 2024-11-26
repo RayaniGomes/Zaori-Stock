@@ -3,6 +3,8 @@ import "./globals.css";
 import StyledComponentsRegistry from "./registry";
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'react-toastify/dist/ReactToastify.css';
+import { Bounce, ToastContainer } from "react-toastify";
 
 export const metadata: Metadata = {
   title: "Zaori Stock",
@@ -14,13 +16,25 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  
+
   return (
     <html lang="en">
       <head>
         <link rel="icon" href="/favicon.svg" />
       </head>
       <body>
+        <ToastContainer position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="dark"
+          transition={Bounce}
+        />
         <StyledComponentsRegistry>
           {children}
         </StyledComponentsRegistry>

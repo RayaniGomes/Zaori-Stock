@@ -3,22 +3,34 @@ import { SectionTabela } from "../styled";
 import { useEffect, useState } from "react";
 import api from "@/service/api";
 import { PropsMoviemntacoes } from "@/interfaces";
+import { toast } from "react-toastify";
 
 export default function Tabela() {
     const [movimentacoes, setMovimentecoes] = useState<PropsMoviemntacoes[]>([]);
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 10;
-    
-    useEffect(() => {
-        api.get('/movements')
-            .then((res) => res.data)
-            .then((data) => setMovimentecoes(data));
-    }, []);
-
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-
     const totalPages = Math.ceil(movimentacoes.length / itemsPerPage);
+
+    useEffect(() => {
+        api.get('/movements/')
+            .then((res) => {
+                console.log(res.data);
+                setMovimentecoes(res.data);
+            })
+    }, []);
+
+    const deleteItem = (id: number) => {
+        api.delete(`/movements/${id}/`)
+            .then((res) => {
+                if (res.status === 204) {
+                    setMovimentecoes(movimentacoes.filter((movimentacao) => movimentacao.id !== id));
+                    toast.success("Excluido com sucesso!")
+                }
+            })
+            .catch((err) => console.log(err));
+    };
 
     const handleNextPage = () => {
         if (currentPage < totalPages) {
@@ -77,13 +89,13 @@ export default function Tabela() {
                                 </td>
                                 <td className="descricao">{movimentacao.product.description}</td>
                                 <td>R$ {movimentacao.product.price}</td>
-                                <td>{movimentacao.product.category.name}</td>
+                                <td>{movimentacao.product?.category?.name}</td>
                                 <td>{movimentacao.quantity}</td>
                                 <td className="botoes">
                                     <a href="/informacoes">
                                         <i className="bi bi-pencil-square" />
                                     </a>
-                                    <button>
+                                    <button onClick={() => { deleteItem(movimentacao.id); }}>
                                         <i className="bi bi-trash" />
                                     </button>
                                 </td>
