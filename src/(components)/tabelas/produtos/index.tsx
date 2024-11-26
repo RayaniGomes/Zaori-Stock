@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import api from "@/service/api";
 import { PropProdutos } from "@/interfaces";
 import { toast } from "react-toastify";
+import Link from "next/link";
 
 export default function Tabela() {
     const [produtos, setProdutos] = useState<PropProdutos[]>([]);
@@ -74,9 +75,9 @@ export default function Tabela() {
                                 <td>{produto.category.name}</td>
                                 <td>{produto.stock_quantity}</td>
                                 <td className="botoes">
-                                    <a href="/informacoes">
+                                    <Link href={`/informacoes/${produto.id}`}>
                                         <i className="bi bi-pencil-square" />
-                                    </a>
+                                    </Link>
                                     <button onClick={() => { deleteItem(produto.id); }}>
                                         <i className="bi bi-trash" />
                                     </button>
