@@ -2,12 +2,23 @@ import { Table } from "react-bootstrap";
 import { SectionTabela } from "../styled";
 import { useEffect, useState } from "react";
 import api from "@/service/api";
-import { PropsMoviemntacoes } from "@/interfaces";
+import { PropsMoviementacoes } from "@/interfaces";
 import { toast } from "react-toastify";
 import Link from "next/link";
 
+export const fomatarData = (date: string) => {
+    const data = new Date(date);
+    const dia = data.getDate().toString();
+    const diaF = (dia.length == 1) ? '0' + dia : dia;
+    const mes = (data.getMonth() + 1).toString();
+    const mesF = (mes.length == 1) ? '0' + mes : mes;
+    const anoF = data.getFullYear();
+
+    return diaF + "/" + mesF + "/" + anoF;
+};
+
 export default function Tabela() {
-    const [movimentacoes, setMovimentecoes] = useState<PropsMoviemntacoes[]>([]);
+    const [movimentacoes, setMovimentecoes] = useState<PropsMoviementacoes[]>([]);
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 10;
     const indexOfLastItem = currentPage * itemsPerPage;
@@ -45,16 +56,7 @@ export default function Tabela() {
         }
     };
 
-    const fomatarData = (date: string) => {
-        const data = new Date(date); 
-        const dia = data.getDate().toString();
-        const diaF = (dia.length == 1) ? '0'+dia : dia;
-        const mes = (data.getMonth()+1).toString(); 
-        const mesF = (mes.length == 1) ? '0'+mes : mes;
-        const anoF = data.getFullYear();
     
-        return diaF+"/"+mesF+"/"+anoF ;
-    };
 
     return (
         <SectionTabela>
@@ -82,7 +84,7 @@ export default function Tabela() {
                         {movimentacoes.slice(indexOfFirstItem, indexOfLastItem).map((movimentacao) => (
                             <tr key={movimentacao.id}>
                                 <td className="status">
-                                    {movimentacao.reason === "IN" ? <i className="bi bi-arrow-down" /> : <i className="bi bi-arrow-up" />}
+                                    {movimentacao.movement_type !== "IN" ? <i className="bi bi-arrow-down" /> : <i className="bi bi-arrow-up" />}
                                 </td>
                                 <td>{fomatarData(movimentacao.created_at)}</td>
                                 <td>
@@ -93,7 +95,7 @@ export default function Tabela() {
                                 <td>{movimentacao.product?.category?.name}</td>
                                 <td>{movimentacao.quantity}</td>
                                 <td className="botoes">
-                                    <Link href="/informacoes">
+                                    <Link href={`/informacoes/${movimentacao.product.id}`}>
                                         <i className="bi bi-pencil-square" />
                                     </Link>
                                     <button onClick={() => { deleteItem(movimentacao.id); }}>
@@ -104,9 +106,9 @@ export default function Tabela() {
                         ))}
                         <tr className="footerTable">
                             <td colSpan={8}>
-                                <button className="bi bi-chevron-double-left" onClick={handlePreviousPage}/>
+                                <button className="bi bi-chevron-double-left" onClick={handlePreviousPage} />
                                 Página {currentPage} de {totalPages}
-                                <button className="bi bi-chevron-double-right" onClick={handleNextPage}/>
+                                <button className="bi bi-chevron-double-right" onClick={handleNextPage} />
                             </td>
                         </tr>
                     </tbody>

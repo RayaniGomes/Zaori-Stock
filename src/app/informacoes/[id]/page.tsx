@@ -1,5 +1,4 @@
 'use client';
-import Navbar from "@/(components)/navbar";
 import { Container, ContainerBody, ContainerMain, Main } from "../../styled";
 import Title from "@/(components)/title";
 import Forms from "@/(components)/forms";
@@ -7,6 +6,7 @@ import Movimentacoes from "@/(components)/movimentacoes";
 import api from "@/service/api";
 import { useEffect, useState } from "react";
 import { PropProdutos } from "@/interfaces";
+import Navbar from "@/(components)/navbar";
 
 export default function Informacoes({ params }: { params: { id: number } }) {
     const [produto, setProduto] = useState<PropProdutos>({} as PropProdutos);
@@ -20,6 +20,7 @@ export default function Informacoes({ params }: { params: { id: number } }) {
 
     useEffect(() => {
         getInformacoes();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (
@@ -33,7 +34,7 @@ export default function Informacoes({ params }: { params: { id: number } }) {
                             <Forms produto={produto} />
                         </div>
                         <div className="col">
-                            <Movimentacoes />
+                            <Movimentacoes id={params.id} />
                         </div>
                     </ContainerBody>
                 </ContainerMain>
