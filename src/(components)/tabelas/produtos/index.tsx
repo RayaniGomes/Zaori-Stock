@@ -6,6 +6,7 @@ import api from "@/service/api";
 import { PropProdutos } from "@/interfaces";
 import { toast } from "react-toastify";
 import Link from "next/link";
+import { formatter } from "../movimentacoes";
 
 export default function Tabela() {
     const [produtos, setProdutos] = useState<PropProdutos[]>([]);
@@ -71,7 +72,7 @@ export default function Tabela() {
                             <tr key={produto.id}>
                                 <td>{produto.name}</td>
                                 <td className="descricao">{produto.description}</td>
-                                <td>R$ {produto.price}</td>
+                                <td>{formatter.format(produto.price)}</td>
                                 <td>{produto.category.name}</td>
                                 <td>{produto.stock_quantity}</td>
                                 <td className="botoes">

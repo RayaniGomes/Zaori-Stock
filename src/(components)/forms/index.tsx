@@ -2,12 +2,13 @@ import { useEffect, useState } from "react";
 import { CampoButtons, CampoTexto, CampoTextoDuplo, ContainerForms, Quantidade } from "./styled";
 import { CategoriaProps, PropProdutos } from "@/interfaces";
 import api from "@/service/api";
+import { formatter } from "../tabelas/movimentacoes";
 
 interface PropsDataProduto {
-    produto: PropProdutos
+    produto?: PropProdutos
 }
 
-export default function Forms({produto}: PropsDataProduto) {
+export default function Forms({produto = {} as PropProdutos}: PropsDataProduto) {
     const [quantidade, setQuantidade] = useState(1);
     const [InfoCategoria, setInfoCategoria] = useState<CategoriaProps[]>([]);
 
@@ -31,7 +32,6 @@ export default function Forms({produto}: PropsDataProduto) {
         }
     };
 
-
     return (
         <ContainerForms>
             <CampoTexto>
@@ -39,10 +39,6 @@ export default function Forms({produto}: PropsDataProduto) {
                 <input type="text" placeholder="Nome do produto" value={produto.name} />
             </CampoTexto>
             <CampoTextoDuplo>
-                {/* <CampoTexto>
-                    <label>Data:</label>
-                    <input type="date" value={} />
-                </CampoTexto> */}
                 <CampoTexto>
                     <label>Categoria:</label>
                     <select name="" id="">
@@ -56,7 +52,7 @@ export default function Forms({produto}: PropsDataProduto) {
             <CampoTextoDuplo>
                 <CampoTexto>
                     <label htmlFor="">Preço:</label>
-                    <input type="text" value={produto.price} />
+                    <input type="text" value={formatter.format(produto.price)} />
                 </CampoTexto>
                 <CampoTexto>
                     <label htmlFor="">Quantidade:</label>

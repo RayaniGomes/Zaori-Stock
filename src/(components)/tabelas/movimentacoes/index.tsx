@@ -17,6 +17,11 @@ export const fomatarData = (date: string) => {
     return diaF + "/" + mesF + "/" + anoF;
 };
 
+export const formatter = new Intl.NumberFormat("pt-BR", {
+    style: "currency",
+    currency: "BRL",
+});
+
 export default function Tabela() {
     const [movimentacoes, setMovimentecoes] = useState<PropsMoviementacoes[]>([]);
     const [currentPage, setCurrentPage] = useState(1);
@@ -91,7 +96,7 @@ export default function Tabela() {
                                     {movimentacao.product.name}
                                 </td>
                                 <td className="descricao">{movimentacao.product.description}</td>
-                                <td>R$ {movimentacao.product.price}</td>
+                                <td>{formatter.format(movimentacao.product.price)}</td>
                                 <td>{movimentacao.product?.category?.name}</td>
                                 <td>{movimentacao.quantity}</td>
                                 <td className="botoes">
