@@ -1,4 +1,4 @@
-export interface PropProdutos{
+export interface PropProdutos {
     id: number;
     name: string;
     description: string;
@@ -10,7 +10,7 @@ export interface PropProdutos{
     };
 }
 
-export interface PropsMoviemntacoes {
+export interface PropsMoviementacoes {
     id: number;
     product: PropProdutos;
     movement_type: string;
