@@ -35,7 +35,7 @@ export const CampoTexto = styled.div`
         border-radius: .625rem;
         border: none;
         background-color: var(--white);
-        padding: 0 .5rem;
+        padding: .5rem;
         box-shadow: var(--drop-shadow);
     }
 `
