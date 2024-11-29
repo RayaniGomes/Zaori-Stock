@@ -1,23 +1,23 @@
-import { useEffect, useState } from "react";
-import { CampoButtons, CampoTexto, CampoTextoDuplo, ContainerForms, Quantidade } from "./styled";
-import { CategoriaProps, PropProdutos } from "@/interfaces";
+import { useCallback, useEffect, useState } from "react";
+import { CampoButtons, CampoTexto, CampoTextoDuplo, ContainerForms, Quantidade } from "../styled";
+import { CategoriaProps } from "@/interfaces";
 import api from "@/service/api";
+import { toast } from "react-toastify";
 
-interface PropsDataProduto {
-    produto?: PropProdutos
-}
-
-export default function Forms({ produto = {} as PropProdutos }: PropsDataProduto) {
-    const [nomeProduto, setNomeProduto] = useState<PropProdutos>({} as PropProdutos);
-    const [precoProduto, setPrecoProduto] = useState<PropProdutos>({} as PropProdutos);
-    const [descricaoProduto, setDescricaoProduto] = useState<PropProdutos>({} as PropProdutos);
-
-    const [quantidade, setQuantidade] = useState(1);
+export default function FormsNovoProduto() {
+    const [nomeProduto, setNomeProduto] = useState('');
+    const [precoProduto, setPrecoProduto] = useState('');
+    const [descricaoProduto, setDescricaoProduto] = useState('');
+    const [quantidade, setQuantidade] = useState<number>(1);
     const [InfoCategoria, setInfoCategoria] = useState<CategoriaProps[]>([]);
+    const [categoriaSelecionada, setCategoriaSelecionada] = useState('');
 
     const getCategoria = () => {
         api.get('/categories/')
-            .then((res) => setInfoCategoria(res.data))
+            .then((res) => {
+                setInfoCategoria(res.data)
+
+            })
             .catch((err) => console.log(err));
     };
 
@@ -35,45 +35,49 @@ export default function Forms({ produto = {} as PropProdutos }: PropsDataProduto
         }
     };
 
-    const criarProduto = (e: React.FormEvent) => {
+    const criarProduto = useCallback((e: React.FormEvent) => {
         e.preventDefault();
 
-        console.log(nomeProduto, precoProduto, quantidade, descricaoProduto);
+        if (!nomeProduto || !precoProduto || !categoriaSelecionada) {
+            toast.error('Preencha todos os campos');
+            return;
+        }
 
         const novoProduto = {
-            name: nomeProduto.name,
-            description: descricaoProduto.description,
-            price: precoProduto.price,
+            name: nomeProduto,
+            description: descricaoProduto,
+            price: precoProduto,
             stock_quantity: quantidade,
-            category: produto.category
+            category: categoriaSelecionada
         }
+
         api.post('/products/', novoProduto)
-        .then((res) => {
-            console.log(res.data);
-        })
+            .then((res) => {
+                console.log(res.data);
+            })
             .catch((err) => console.log(err));
-    }
+    }, [nomeProduto, descricaoProduto, precoProduto, quantidade, categoriaSelecionada]);
 
     return (
         <ContainerForms onSubmit={(e) => criarProduto(e)}>
             <CampoTexto>
-                <label>Nome:</label>
+                <label>Nome*</label>
                 <input
                     type="text"
                     placeholder="Nome do produto"
-                    defaultValue={produto.name}
-                    onChange={(e) => setNomeProduto({ ...nomeProduto, name: e.target.value })}
+                    onChange={(e) => setNomeProduto(e.target.value)}
                 />
             </CampoTexto>
             <CampoTextoDuplo>
                 <CampoTexto>
-                    <label>Categoria:</label>
+                    <label>Categoria*</label>
                     <select
-                        defaultValue={produto?.category?.id}                                                         
+                        value={categoriaSelecionada}
+                        onChange={(e) => setCategoriaSelecionada(e.target.value)}
                     >
-                        <option defaultValue={produto?.category?.id}>{produto?.category?.name}</option>
+                        <option disabled value="">Selecione</option>
                         {InfoCategoria.map((categoria) => (
-                            <option key={categoria.id} defaultValue={categoria.id}>
+                            <option key={categoria.id} value={categoria.id}>
                                 {categoria.name}
                             </option>
                         ))}
@@ -82,32 +86,33 @@ export default function Forms({ produto = {} as PropProdutos }: PropsDataProduto
             </CampoTextoDuplo>
             <CampoTextoDuplo>
                 <CampoTexto>
-                    <label htmlFor="">Preço:</label>
+                    <label htmlFor="">Preço*</label>
                     <input
                         type="number"
-                        defaultValue={produto.price}
-                        onChange={(e) => setPrecoProduto({ ...precoProduto, price: parseFloat(e.target.value) })}
+                        placeholder="0.00"
+                        onChange={(e) => setPrecoProduto(e.target.value)}
                     />
                 </CampoTexto>
                 <CampoTexto>
-                    <label htmlFor="">Quantidade:</label>
+                    <label htmlFor="">Quantidade</label>
                     <Quantidade>
                         <button type="button" className="bi bi-dash" onClick={diminuirQuantidade} aria-label="Diminuir quantidade" />
                         <input
                             type="text"
-                            defaultValue={produto.stock_quantity}
+                            value={quantidade}
                             min="1"
                             placeholder="1"
+                            onChange={(e) => setQuantidade(Number(e.target.value))}
                         />
                         <button type="button" className="bi bi-plus" onClick={aumentarQuantidade} aria-label="Aumentar quantidade" />
                     </Quantidade>
                 </CampoTexto>
             </CampoTextoDuplo>
             <CampoTexto>
-                <label htmlFor="">Descrição:</label>
+                <label htmlFor="">Descrição</label>
                 <textarea
-                    defaultValue={produto.description}
-                    onChange={(e) => setDescricaoProduto({ ...descricaoProduto, description: e.target.value })}
+                    placeholder="Descrição do produto"
+                    onChange={(e) => setDescricaoProduto(e.target.value)}
                 />
             </CampoTexto>
             <CampoButtons>

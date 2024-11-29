@@ -2,7 +2,7 @@
 import Navbar from "@/(components)/navbar";
 import { Container, ContainerMain, Main } from "../styled";
 import Title from "@/(components)/title";
-import Forms from "@/(components)/forms";
+import FormsNovoProduto from "@/(components)/formularios/formNovoProduto";
 
 export default function Cadastro() {
     return (
@@ -11,7 +11,7 @@ export default function Cadastro() {
             <Main>
                 <ContainerMain>
                     <Title title="Cadastrar Produto" />
-                    <Forms />
+                    <FormsNovoProduto />
                 </ContainerMain>
             </Main>
         </Container>

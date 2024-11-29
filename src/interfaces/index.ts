@@ -4,10 +4,7 @@ export interface PropProdutos {
     description: string;
     price: number;
     stock_quantity: number;
-    category: {
-        id: number,
-        name: string;
-    };
+    category: CategoriaProps;
 }
 
 export interface PropsMoviementacoes {
