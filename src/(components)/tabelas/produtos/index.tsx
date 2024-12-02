@@ -15,6 +15,8 @@ export default function Tabela() {
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
     const totalPages = Math.ceil(produtos.length / itemsPerPage);
+    const [ordem, setOrdem] = useState(-1);
+    const [ordenarColuna, setOrdenarColuna] = useState('id');
 
     useEffect(() => {
         api.get('/products/')
@@ -46,6 +48,23 @@ export default function Tabela() {
             setCurrentPage(currentPage - 1);
         }
     };
+    
+    const ordenar = (fieldName: string) => {
+        setOrdem(ordem === 1 ? -1 : 1); 
+        setOrdenarColuna(fieldName);
+    }
+
+    const comparadores = {
+        price: (a: PropProdutos, b: PropProdutos) => (a.price - b.price) * ordem,
+        stock_quantity: (a: PropProdutos, b: PropProdutos) => (a.stock_quantity - b.stock_quantity) * ordem,
+        id: (a: PropProdutos, b: PropProdutos) => (a.id - b.id) * ordem,
+        name: (a: PropProdutos, b: PropProdutos) => a.name.localeCompare(b.name) * ordem,
+    };
+
+    const sortedProdutos = [...produtos].sort(comparadores[ordenarColuna as keyof typeof comparadores] || comparadores.id);
+
+    const produtosList = sortedProdutos.slice(indexOfFirstItem, indexOfLastItem);
+
 
     return (
         <SectionTabela>
@@ -53,22 +72,25 @@ export default function Tabela() {
                 <Table>
                     <thead>
                         <tr>
-                            <th>Nome</th>
+                            <th>
+                                Nome
+                                <button className="bi bi-arrow-down-up" onClick={() => { ordenar('id') }}/>
+                            </th>
                             <th className="descricao">Descrição</th>
                             <th>
                                 Preço
-                                <button className="bi bi-arrow-down-up" />
+                                <button className="bi bi-arrow-down-up" onClick={() => { ordenar('price') }}/>
                             </th>
                             <th>Categoria</th>
                             <th>
                                 Quantidade
-                                <button className="bi bi-arrow-down-up" />
-                            </th>
+                                <button className="bi bi-arrow-down-up" onClick={() => { ordenar('stock_quantity') }}/>
+                            </th> 
                             <th className="botoes"></th>
                         </tr>
                     </thead>
                     <tbody>
-                        {produtos.sort((a, b) => a.name.localeCompare(b.name)).slice(indexOfFirstItem, indexOfLastItem).map((produto) => (
+                        {produtosList.map((produto) => (
                             <tr key={produto.id}>
                                 <td>{produto.name}</td>
                                 <td className="descricao">{produto.description}</td>
@@ -79,7 +101,7 @@ export default function Tabela() {
                                     <Link href={`/informacoes/${produto.id}`}>
                                         <i className="bi bi-pencil-square" />
                                     </Link>
-                                    <button onClick={() => { deleteItem(produto.id); }}>
+                                    <button onClick={() => { deleteItem(produto.id) }}>
                                         <i className="bi bi-trash" />
                                     </button>
                                 </td>

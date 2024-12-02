@@ -74,6 +74,7 @@ export const SectionTabela = styled.section`
                         color: var(--dark);
                         border: none;
                         font-size: 20px;
+                        cursor: pointer;
     
                         &:hover {
                             color: var(--yellow);
