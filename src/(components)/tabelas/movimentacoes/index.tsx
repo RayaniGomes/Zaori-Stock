@@ -96,7 +96,7 @@ export default function Tabela() {
                                 Preço
                                 <button className="bi bi-arrow-down-up" onClick={() => { ordenar('price') }}/>
                             </th>
-                            <th>Rasão</th>
+                            <th>Razão</th>
                             <th>Categoria</th>
                             <th>
                                 Quantidade
