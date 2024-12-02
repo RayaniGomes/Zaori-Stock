@@ -68,7 +68,7 @@ export default function Tabela() {
                         </tr>
                     </thead>
                     <tbody>
-                        {produtos.slice(indexOfFirstItem, indexOfLastItem).map((produto) => (
+                        {produtos.sort((a, b) => a.name.localeCompare(b.name)).slice(indexOfFirstItem, indexOfLastItem).map((produto) => (
                             <tr key={produto.id}>
                                 <td>{produto.name}</td>
                                 <td className="descricao">{produto.description}</td>

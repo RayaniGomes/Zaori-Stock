@@ -86,7 +86,7 @@ export default function Tabela() {
                         </tr>
                     </thead>
                     <tbody>
-                        {movimentacoes.slice(indexOfFirstItem, indexOfLastItem).map((movimentacao) => (
+                        {movimentacoes.sort((a, b) => b.id - a.id).slice(indexOfFirstItem, indexOfLastItem).map((movimentacao) => (
                             <tr key={movimentacao.id}>
                                 <td className="status">
                                     {movimentacao.movement_type !== "IN" ? <i className="bi bi-arrow-down" /> : <i className="bi bi-arrow-up" />}

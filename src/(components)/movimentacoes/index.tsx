@@ -33,7 +33,7 @@ export default function Movimentacoes({ id }: PropsInfoMov) {
             <h3>Movimentação do produto</h3>
             <Tabela>
                 <tbody>
-                    {movimentacoes.map((mov) => (
+                    {movimentacoes.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()).map((mov) => (
                         <tr className="d-flex justify-content-between" key={mov.id}>
                             <div className="d-flex gap-4">
                                 <td>
