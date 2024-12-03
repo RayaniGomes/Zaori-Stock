@@ -7,6 +7,8 @@ import { PropProdutos } from "@/interfaces";
 import { toast } from "react-toastify";
 import Link from "next/link";
 import { formatter } from "../movimentacoes";
+import Movimentacoes from "@/(components)/movimentacoes";
+import ModalMovimentacao from "@/(components)/modalMovimentacao";
 
 export default function Tabela() {
     const [produtos, setProdutos] = useState<PropProdutos[]>([]);
@@ -47,9 +49,9 @@ export default function Tabela() {
             setCurrentPage(currentPage - 1);
         }
     };
-    
+
     const ordenar = (fieldName: string) => {
-        setOrdem(ordem === 1 ? -1 : 1); 
+        setOrdem(ordem === 1 ? -1 : 1);
         setOrdenarColuna(fieldName);
     }
 
@@ -73,18 +75,18 @@ export default function Tabela() {
                         <tr>
                             <th>
                                 Nome
-                                <button className="bi bi-arrow-down-up" onClick={() => { ordenar('id') }}/>
+                                <button className="bi bi-arrow-down-up" onClick={() => { ordenar('id') }} />
                             </th>
                             <th className="descricao">Descrição</th>
                             <th>
                                 Preço
-                                <button className="bi bi-arrow-down-up" onClick={() => { ordenar('price') }}/>
+                                <button className="bi bi-arrow-down-up" onClick={() => { ordenar('price') }} />
                             </th>
                             <th>Categoria</th>
                             <th>
                                 Quantidade
-                                <button className="bi bi-arrow-down-up" onClick={() => { ordenar('stock_quantity') }}/>
-                            </th> 
+                                <button className="bi bi-arrow-down-up" onClick={() => { ordenar('stock_quantity') }} />
+                            </th>
                             <th className="botoes"></th>
                         </tr>
                     </thead>
@@ -97,6 +99,7 @@ export default function Tabela() {
                                 <td>{produto.category.name}</td>
                                 <td>{produto.stock_quantity}</td>
                                 <td className="botoes">
+                                    <button className="bi bi-box-arrow-right" onClick={() => { Movimentacoes({ id: produto.id }) }} />
                                     <Link href={`/informacoes/${produto.id}`}>
                                         <i className="bi bi-pencil-square" />
                                     </Link>
@@ -114,7 +117,8 @@ export default function Tabela() {
                             </td>
                         </tr>
                     </tbody>
-                </Table>                   
+                </Table>
+            <ModalMovimentacao />
             </div>
         </SectionTabela>
     )

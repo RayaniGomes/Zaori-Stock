@@ -67,6 +67,7 @@ export default function FormsEditarProduto({ produto = {} as PropProdutos }: Pro
                 console.error(err);
                 toast.error('Erro ao atualizar o produto.');
             });
+            // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [nomeProduto, descricaoProduto, precoProduto, quantidade, categoriaSelecionada]);
 
     return (
