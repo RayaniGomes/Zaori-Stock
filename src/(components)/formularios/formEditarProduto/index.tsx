@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import { CampoButtons, CampoTexto, CampoTextoDuplo, ContainerForms, Quantidade } from "../styled";
 import { CategoriaProps, PropProdutos } from "@/interfaces";
 import api from "@/service/api";
+import { toast } from "react-toastify";
 
 interface PropsDataProduto {
     produto?: PropProdutos;
@@ -9,11 +10,11 @@ interface PropsDataProduto {
 
 export default function FormsEditarProduto({ produto = {} as PropProdutos }: PropsDataProduto) {
     const [nomeProduto, setNomeProduto] = useState('');
-    const [precoProduto, setPrecoProduto] = useState('');
+    const [precoProduto, setPrecoProduto] = useState<number>(0);
     const [descricaoProduto, setDescricaoProduto] = useState('');
     const [quantidade, setQuantidade] = useState<number>(1);
     const [InfoCategoria, setInfoCategoria] = useState<CategoriaProps[]>([]);
-    const [categoriaSelecionada, setCategoriaSelecionada] = useState<string>('');
+    const [categoriaSelecionada, setCategoriaSelecionada] = useState<number>(0);
 
     const getCategoria = () => {
         api.get('/categories/')
@@ -26,7 +27,15 @@ export default function FormsEditarProduto({ produto = {} as PropProdutos }: Pro
 
     useEffect(() => {
         getCategoria();
-    }, []);
+
+        if (produto) {
+            setNomeProduto(produto.name);
+            setPrecoProduto(produto.price);
+            setDescricaoProduto(produto.description);
+            setQuantidade(produto.stock_quantity);
+            setCategoriaSelecionada(produto?.category?.id);
+        }
+    }, [produto]);
 
     const aumentarQuantidade = () => {
         setQuantidade(prevQuantidade => prevQuantidade + 1);
@@ -41,7 +50,7 @@ export default function FormsEditarProduto({ produto = {} as PropProdutos }: Pro
     const editarProduto = useCallback((e: React.FormEvent) => {
         e.preventDefault();
 
-        const novoProduto = {
+        const dadosProduto = {
             name: nomeProduto,
             description: descricaoProduto,
             price: precoProduto,
@@ -49,15 +58,19 @@ export default function FormsEditarProduto({ produto = {} as PropProdutos }: Pro
             category: categoriaSelecionada
         }
 
-        api.patch('/products/', novoProduto)
+        api.patch(`/products/${produto.id}/`, dadosProduto)
             .then((res) => {
+                toast.success('Produto atualizado com sucesso!');
                 console.log(res.data);
             })
-            .catch((err) => console.log(err));
+            .catch((err) => {
+                console.error(err);
+                toast.error('Erro ao atualizar o produto.');
+            });
     }, [nomeProduto, descricaoProduto, precoProduto, quantidade, categoriaSelecionada]);
 
     return (
-        <ContainerForms onSubmit={(e) => editarProduto(e)}>
+        <ContainerForms onSubmit={editarProduto}>
             <CampoTexto>
                 <label>Nome*</label>
                 <input
@@ -72,7 +85,7 @@ export default function FormsEditarProduto({ produto = {} as PropProdutos }: Pro
                     <label>Categoria*</label>
                     <select
                         value={categoriaSelecionada}
-                        onChange={(e) => setCategoriaSelecionada(e.target.value)}
+                        onChange={(e) => setCategoriaSelecionada(Number(e.target.value))}
                     >
                         <option value={produto?.category?.id} disabled>{produto?.category?.name}</option>
                         {InfoCategoria.map((categoria) => (
@@ -87,10 +100,10 @@ export default function FormsEditarProduto({ produto = {} as PropProdutos }: Pro
                 <CampoTexto>
                     <label htmlFor="">Preço*</label>
                     <input
-                        type="number"
+                        type="number-only"
                         placeholder="0.00"
                         defaultValue={produto.price}
-                        onChange={(e) => setPrecoProduto(e.target.value)}
+                        onChange={(e) => setPrecoProduto(Number(e.target.value))}
                     />
                 </CampoTexto>
                 <CampoTexto>

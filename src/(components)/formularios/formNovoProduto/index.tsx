@@ -88,7 +88,7 @@ export default function FormsNovoProduto() {
                 <CampoTexto>
                     <label htmlFor="">Preço*</label>
                     <input
-                        type="number"
+                        type="number-only"
                         placeholder="0.00"
                         onChange={(e) => setPrecoProduto(e.target.value)}
                     />
