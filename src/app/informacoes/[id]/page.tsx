@@ -13,8 +13,6 @@ type Params = Promise<{ id: string }>;
 export default function Informacoes(props : {params: Params}) {
     const urlParams = use(props.params);
     const [produto, setProduto] = useState<PropProdutos>({} as PropProdutos);
-    
-    console.log(urlParams?.id);
 
     const getInformacoes = () => {
         api.get(`/products/${urlParams?.id}/`)

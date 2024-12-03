@@ -21,7 +21,6 @@ export default function Tabela() {
     useEffect(() => {
         api.get('/products/')
             .then((res) => {
-                console.log(res.data);
                 setProdutos(res.data);
             })
     }, []);

@@ -35,7 +35,6 @@ export default function Tabela() {
     useEffect(() => {
         api.get('/movements/')
             .then((res) => {
-                console.log(res.data);
                 setMovimentecoes(res.data);
             })
     }, []);
