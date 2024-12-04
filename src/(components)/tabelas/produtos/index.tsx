@@ -7,7 +7,6 @@ import { PropProdutos } from "@/interfaces";
 import { toast } from "react-toastify";
 import Link from "next/link";
 import { formatter } from "../movimentacoes";
-import Movimentacoes from "@/(components)/movimentacoes";
 import ModalMovimentacao from "@/(components)/modalMovimentacao";
 
 export default function Tabela() {
@@ -19,12 +18,18 @@ export default function Tabela() {
     const totalPages = Math.ceil(produtos.length / itemsPerPage);
     const [ordem, setOrdem] = useState(-1);
     const [ordenarColuna, setOrdenarColuna] = useState('id');
+    const [selectedProduto, setSelectedProduto] = useState<PropProdutos | null>(null);
+    const [show, setShow] = useState(false);
 
-    useEffect(() => {
+    const getProdutos = () => {
         api.get('/products/')
             .then((res) => {
                 setProdutos(res.data);
             })
+    };
+
+    useEffect(() => {
+        getProdutos();
     }, []);
 
     const deleteItem = (id: number) => {
@@ -48,6 +53,12 @@ export default function Tabela() {
         if (currentPage > 1) {
             setCurrentPage(currentPage - 1);
         }
+    };
+
+    const handleClose = () => setShow(false);
+    const handleShow = (produto: PropProdutos) => {
+        setSelectedProduto(produto);
+        setShow(true);
     };
 
     const ordenar = (fieldName: string) => {
@@ -99,7 +110,9 @@ export default function Tabela() {
                                 <td>{produto.category.name}</td>
                                 <td>{produto.stock_quantity}</td>
                                 <td className="botoes">
-                                    <button className="bi bi-box-arrow-right" onClick={() => { Movimentacoes({ id: produto.id }) }} />
+                                    <button onClick={() => handleShow(produto)}>
+                                        <i className="bi bi-box-arrow-right" />
+                                    </button>
                                     <Link href={`/informacoes/${produto.id}`}>
                                         <i className="bi bi-pencil-square" />
                                     </Link>
@@ -118,8 +131,8 @@ export default function Tabela() {
                         </tr>
                     </tbody>
                 </Table>
-            <ModalMovimentacao />
             </div>
+            <ModalMovimentacao produto={selectedProduto ?? {} as PropProdutos} handleClose={handleClose} show={show} getProdutos={getProdutos} />
         </SectionTabela>
     )
 }

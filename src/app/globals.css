@@ -44,6 +44,7 @@ h4 {
 h5 {
   font-size: 14px !important;
   font-weight: 400 !important;
+  margin: 0 !important;
 }
 
 p {
@@ -93,6 +94,10 @@ p {
     background: #383838de;
 
   }
+}
+
+.modal-backdrop.show {
+  opacity: 0.1 !important;
 }
 
 .bi-arrow-down {
