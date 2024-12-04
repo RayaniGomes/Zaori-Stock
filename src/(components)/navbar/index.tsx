@@ -14,7 +14,7 @@ export default function Navbar() {
 
     return (
         <Nav>
-            <Logo href="/app/page">
+            <Logo href="/">
                 <Image 
                     width={183} 
                     height={61} 
