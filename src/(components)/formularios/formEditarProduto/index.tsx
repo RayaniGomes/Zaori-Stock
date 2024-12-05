@@ -37,16 +37,6 @@ export default function FormsEditarProduto({ produto = {} as PropProdutos }: Pro
         }
     }, [produto]);
 
-    const aumentarQuantidade = () => {
-        setQuantidade(prevQuantidade => prevQuantidade + 1);
-    };
-
-    const diminuirQuantidade = () => {
-        if (quantidade > 1) {
-            setQuantidade(prevQuantidade => prevQuantidade - 1);
-        }
-    };
-
     const editarProduto = useCallback((e: React.FormEvent) => {
         e.preventDefault();
 
@@ -67,7 +57,7 @@ export default function FormsEditarProduto({ produto = {} as PropProdutos }: Pro
                 console.error(err);
                 toast.error('Erro ao atualizar o produto.');
             });
-            // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [nomeProduto, descricaoProduto, precoProduto, quantidade, categoriaSelecionada]);
 
     return (
@@ -110,15 +100,16 @@ export default function FormsEditarProduto({ produto = {} as PropProdutos }: Pro
                 <CampoTexto>
                     <label htmlFor="">Quantidade</label>
                     <Quantidade>
-                        <button type="button" className="bi bi-dash" onClick={diminuirQuantidade} aria-label="Diminuir quantidade" />
+                        <button type="button" className="bi bi-dash" aria-label="Diminuir quantidade" onClick={() => toast.warning("Quantidade só pode ser alterada quando for feita uma movimentação")} />
                         <input
                             type="text"
                             defaultValue={produto.stock_quantity}
                             min="1"
                             placeholder="1"
                             onChange={(e) => setQuantidade(Number(e.target.value))}
+                            readOnly
                         />
-                        <button type="button" className="bi bi-plus" onClick={aumentarQuantidade} aria-label="Aumentar quantidade" />
+                        <button type="button" className="bi bi-plus" aria-label="Aumentar quantidade" onClick={() => toast.warning("Quantidade só pode ser alterada quando for feita uma movimentação")} />
                     </Quantidade>
                 </CampoTexto>
             </CampoTextoDuplo>
@@ -134,6 +125,8 @@ export default function FormsEditarProduto({ produto = {} as PropProdutos }: Pro
                 <button className="bntPrincipal">Cadastrar</button>
                 <button className="bntSecondario">Cancelar</button>
             </CampoButtons>
+
+            
         </ContainerForms >
     )
 }
