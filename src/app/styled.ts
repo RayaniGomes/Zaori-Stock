@@ -52,32 +52,3 @@ export const ContainerBody = styled.div`
         gap: 1rem;
     }
 `
-
-export const ContainerMovimentacoes = styled.div`
-    width: 100%;
-    height: 500px;
-    display: flex;
-    flex-direction: column;
-    background: var(--gradient);
-    border-radius: 1.25rem;
-    padding: 1rem;
-    margin-top: 3rem;
-    overflow: hidden;
-
-    .btnMov {
-        background: transparent;
-        border: none;
-        color: var(--dark);
-        font-size: 20px;
-        cursor: pointer;
-    }
-    
-    h3 {
-        margin: 0;
-    }
-
-    @media (max-width: 768px) {
-        width: 100%;
-        margin: 2rem 0 5rem 0;
-    }
-`
