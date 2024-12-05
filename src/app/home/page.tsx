@@ -51,7 +51,6 @@ export default function Home() {
           </SectionContador>
           <Filtro />
           <h3>Últimas movimentações</h3>
-          <Tabela />
         </ContainerMain>
       </Main>
     </Container>

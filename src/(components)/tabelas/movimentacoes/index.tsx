@@ -22,7 +22,11 @@ export const formatter = new Intl.NumberFormat("pt-BR", {
     currency: "BRL",
 });
 
-export default function Tabela() {
+interface PropsProdutos {
+    produto: PropsMoviementacoes
+}
+
+export default function Tabela({ produto }: PropsProdutos) {
     const [movimentacoes, setMovimentecoes] = useState<PropsMoviementacoes[]>([]);
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 10;
@@ -93,42 +97,47 @@ export default function Tabela() {
                             <th className="descricao">Descrição</th>
                             <th>
                                 Preço
-                                <button className="bi bi-arrow-down-up" onClick={() => { ordenar('price') }}/>
+                                <button className="bi bi-arrow-down-up" onClick={() => { ordenar('price') }} />
                             </th>
                             <th>Razão</th>
                             <th>Categoria</th>
                             <th>
                                 Quantidade
-                                <button className="bi bi-arrow-down-up" onClick={() => { ordenar('quantity') }}/>
+                                <button className="bi bi-arrow-down-up" onClick={() => { ordenar('quantity') }} />
                             </th>
                             <th className="botoes"></th>
                         </tr>
                     </thead>
                     <tbody>
-                        {movimentacoesList.map((movimentacao) => (
-                            <tr key={movimentacao.id}>
-                                <td className="status">
-                                    {movimentacao.movement_type !== "IN" ? <i className="bi bi-arrow-down" /> : <i className="bi bi-arrow-up" />}
-                                </td>
-                                <td>{fomatarData(movimentacao.created_at)}</td>
-                                <td>
-                                    {movimentacao.product.name}
-                                </td>
-                                <td className="descricao">{movimentacao.product.description}</td>
-                                <td>{formatter.format(movimentacao.product.price)}</td>
-                                <td>{movimentacao.reason}</td>
-                                <td>{movimentacao.product?.category?.name}</td>
-                                <td>{movimentacao.quantity}</td>
-                                <td className="botoes">
-                                    <Link href={`/informacoes/${movimentacao.product.id}`}>
-                                        <i className="bi bi-pencil-square" />
-                                    </Link>
-                                    <button onClick={() => { deleteItem(movimentacao.id); }}>
-                                        <i className="bi bi-trash" />
-                                    </button>
-                                </td>
+                        {produto.length < 0
+                            ? movimentacoesList.map((movimentacao) => (
+                                <tr key={movimentacao.id}>
+                                    <td className="status">
+                                        {movimentacao.movement_type !== "IN" ? <i className="bi bi-arrow-down" /> : <i className="bi bi-arrow-up" />}
+                                    </td>
+                                    <td>{fomatarData(movimentacao.created_at)}</td>
+                                    <td>
+                                        {movimentacao.product.name}
+                                    </td>
+                                    <td className="descricao">{movimentacao.product.description}</td>
+                                    <td>{formatter.format(movimentacao.product.price)}</td>
+                                    <td>{movimentacao.reason}</td>
+                                    <td>{movimentacao.product?.category?.name}</td>
+                                    <td>{movimentacao.quantity}</td>
+                                    <td className="botoes">
+                                        <Link href={`/informacoes/${movimentacao.product.id}`}>
+                                            <i className="bi bi-pencil-square" />
+                                        </Link>
+                                        <button onClick={() => { deleteItem(movimentacao.id); }}>
+                                            <i className="bi bi-trash" />
+                                        </button>
+                                    </td>
+                                </tr>
+                            ))
+                            : <tr>
+                                <td colSpan={8}>Nenhum movimento encontrado</td>
                             </tr>
-                        ))}
+                        }
                         <tr className="footerTable">
                             <td colSpan={8}>
                                 <button className="bi bi-chevron-double-left" onClick={handlePreviousPage} />
