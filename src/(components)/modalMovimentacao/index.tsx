@@ -13,7 +13,7 @@ interface ModalProps {
     produto: PropProdutos
 }
 
-export default function ModalMovimentacao({ produto, handleClose, show, getProdutos = () => { } }: ModalProps) {
+export default function ModalMovimentacao({ produto, handleClose, show, getProdutos = () => {}}: ModalProps) {
     const [nomeProduto, setNomeProduto] = useState('');
     const [tipoMov, setTipoMov] = useState('');
     const [quantidade, setQuantidade] = useState<number>(1);
@@ -44,6 +44,7 @@ export default function ModalMovimentacao({ produto, handleClose, show, getProdu
                 }
             })
             .catch((err) => console.log(err));
+            // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [nomeProduto, tipoMov, quantidade, razao]);
 
     const aumentarQuantidade = () => {
@@ -62,7 +63,7 @@ export default function ModalMovimentacao({ produto, handleClose, show, getProdu
             onHide={handleClose}
         >
             <Modal.Dialog>
-                <Modal.Header closeButton>
+                <Modal.Header closeButton className='border-0'> 
                     <Modal.Title>Movimenrtação</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
