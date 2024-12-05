@@ -69,6 +69,7 @@ p {
   display: flex;
   align-items: center;
   justify-content: center;
+  box-shadow: var(--drop-shadow);
 
   &:hover {
     background: linear-gradient(270deg, rgba(252, 204, 16, 0.8) 0%, rgba(248, 171, 48, 0.8) 100%);
@@ -89,6 +90,7 @@ p {
   border-radius: .625rem;
   color: var(--white);
   cursor: pointer;
+  box-shadow: var(--drop-shadow);
 
   &:hover {
     background: #383838de;
