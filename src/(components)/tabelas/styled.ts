@@ -138,5 +138,14 @@ export const SectionTabela = styled.section`
     .descricao {
         width: 200px;
     }
+
+    .feedbackTable {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: .25rem .5rem;
+        font-size: 14px;
+    }
 `
 

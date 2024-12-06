@@ -1,10 +1,10 @@
 import { Table } from "react-bootstrap";
 import { SectionTabela } from "../styled";
 import { useEffect, useState } from "react";
-import api from "@/service/api";
 import { PropsMoviementacoes } from "@/interfaces";
-import { toast } from "react-toastify";
 import Link from "next/link";
+import { useProdutos } from "@/store/storeProdutos";
+import { useMovimentacao } from "@/store/storeMovimentacao";
 
 export const fomatarData = (date: string) => {
     const data = new Date(date);
@@ -22,12 +22,9 @@ export const formatter = new Intl.NumberFormat("pt-BR", {
     currency: "BRL",
 });
 
-interface PropsProdutos {
-    produto: PropsMoviementacoes
-}
-
-export default function Tabela({ produto }: PropsProdutos) {
-    const [movimentacoes, setMovimentecoes] = useState<PropsMoviementacoes[]>([]);
+export default function Tabela() {
+    const { deleteItem } = useProdutos();
+    const { movimentacoes, getMovimentacoes } = useMovimentacao();
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 10;
     const indexOfLastItem = currentPage * itemsPerPage;
@@ -37,22 +34,9 @@ export default function Tabela({ produto }: PropsProdutos) {
     const [ordenarColuna, setOrdenarColuna] = useState('id');
 
     useEffect(() => {
-        api.get('/movements/')
-            .then((res) => {
-                setMovimentecoes(res.data);
-            })
+        getMovimentacoes();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
-
-    const deleteItem = (id: number) => {
-        api.delete(`/movements/${id}/`)
-            .then((res) => {
-                if (res.status === 204) {
-                    setMovimentecoes(movimentacoes.filter((movimentacao) => movimentacao.id !== id));
-                    toast.success("Excluido com sucesso!")
-                }
-            })
-            .catch((err) => console.log(err));
-    };
 
     const handleNextPage = () => {
         if (currentPage < totalPages) {
@@ -109,8 +93,11 @@ export default function Tabela({ produto }: PropsProdutos) {
                         </tr>
                     </thead>
                     <tbody>
-                        {produto.length < 0
-                            ? movimentacoesList.map((movimentacao) => (
+                        {movimentacoesList.length === 0
+                            ? <tr className="feedbackTable">
+                                <td className="text-center w-100" colSpan={8}>Nenhuma movimentação cadastrada ou encontrado com esse filtro</td>
+                            </tr>
+                            : movimentacoesList.map((movimentacao) => (
                                 <tr key={movimentacao.id}>
                                     <td className="status">
                                         {movimentacao.movement_type !== "IN" ? <i className="bi bi-arrow-down" /> : <i className="bi bi-arrow-up" />}
@@ -134,9 +121,6 @@ export default function Tabela({ produto }: PropsProdutos) {
                                     </td>
                                 </tr>
                             ))
-                            : <tr>
-                                <td colSpan={8}>Nenhum movimento encontrado</td>
-                            </tr>
                         }
                         <tr className="footerTable">
                             <td colSpan={8}>
