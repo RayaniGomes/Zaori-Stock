@@ -2,15 +2,14 @@
 import { Table } from "react-bootstrap";
 import { SectionTabela } from "../styled";
 import { useEffect, useState } from "react";
-import api from "@/service/api";
 import { PropProdutos } from "@/interfaces";
-import { toast } from "react-toastify";
 import Link from "next/link";
 import { formatter } from "../movimentacoes";
 import ModalMovimentacao from "@/(components)/modalMovimentacao";
+import { useProdutos } from "@/store/storeProdutos";
 
 export default function Tabela() {
-    const [produtos, setProdutos] = useState<PropProdutos[]>([]);
+    const { produtos, getProdutos, deleteItem } = useProdutos();
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 10;
     const indexOfLastItem = currentPage * itemsPerPage;
@@ -20,28 +19,6 @@ export default function Tabela() {
     const [ordenarColuna, setOrdenarColuna] = useState('id');
     const [selectedProduto, setSelectedProduto] = useState<PropProdutos | null>(null);
     const [show, setShow] = useState(false);
-
-    const getProdutos = () => {
-        api.get('/products/')
-            .then((res) => {
-                setProdutos(res.data);
-            })
-    };
-
-    useEffect(() => {
-        getProdutos();
-    }, []);
-
-    const deleteItem = (id: number) => {
-        api.delete(`/products/${id}/`)
-            .then((res) => {
-                if (res.status === 204) {
-                    setProdutos(produtos.filter((produto) => produto.id !== id));
-                    toast.success("Excluido com sucesso!")
-                }
-            })
-            .catch((err) => console.log(err));
-    };
 
     const handleNextPage = () => {
         if (currentPage < totalPages) {
@@ -77,6 +54,10 @@ export default function Tabela() {
 
     const produtosList = sortedProdutos.slice(indexOfFirstItem, indexOfLastItem);
 
+    useEffect(() => {
+        getProdutos();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     return (
         <SectionTabela>
@@ -102,26 +83,30 @@ export default function Tabela() {
                         </tr>
                     </thead>
                     <tbody>
-                        {produtosList.map((produto) => (
-                            <tr key={produto.id}>
-                                <td>{produto.name}</td>
-                                <td className="descricao">{produto.description}</td>
-                                <td>{formatter.format(produto.price)}</td>
-                                <td>{produto.category.name}</td>
-                                <td>{produto.stock_quantity}</td>
-                                <td className="botoes">
-                                    <button onClick={() => handleShow(produto)}>
-                                        <i className="bi bi-box-arrow-right" />
-                                    </button>
-                                    <Link href={`/informacoes/${produto.id}`}>
-                                        <i className="bi bi-pencil-square" />
-                                    </Link>
-                                    <button onClick={() => { deleteItem(produto.id) }}>
-                                        <i className="bi bi-trash" />
-                                    </button>
-                                </td>
+                        {produtosList.length === 0
+                            ? <tr className="feedbackTable">
+                                <td className="text-center w-100" colSpan={8}>Nenhum produto cadastrado ou encontrado com esse filtro</td>
                             </tr>
-                        ))}
+                            : produtosList.map((produto) => (
+                                <tr key={produto.id}>
+                                    <td>{produto.name}</td>
+                                    <td className="descricao">{produto.description}</td>
+                                    <td>{formatter.format(produto.price)}</td>
+                                    <td>{produto.category.name}</td>
+                                    <td>{produto.stock_quantity}</td>
+                                    <td className="botoes">
+                                        <button onClick={() => handleShow(produto)}>
+                                            <i className="bi bi-box-arrow-right" />
+                                        </button>
+                                        <Link href={`/informacoes/${produto.id}`}>
+                                            <i className="bi bi-pencil-square" />
+                                        </Link>
+                                        <button onClick={() => { deleteItem(produto.id) }}>
+                                            <i className="bi bi-trash" />
+                                        </button>
+                                    </td>
+                                </tr>
+                            ))}
                         <tr className="footerTable">
                             <td colSpan={8}>
                                 <button className="bi bi-chevron-double-left" onClick={handlePreviousPage} />
