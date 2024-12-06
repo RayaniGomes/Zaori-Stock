@@ -8,6 +8,7 @@ interface PropUseProdutos {
     getProdutos: () => void;
     deleteItem: (id: number) => void;
     filtroCategoriaProdutos: (idCategoria: number) => void;
+    filterName: (nameProduto: string) => void
 }
 
 
@@ -42,4 +43,14 @@ export const useProdutos= create<PropUseProdutos> ((set) => ({
                 set({ produtos: res.data })
             })
     },
+
+    filterName: async (nameProduto: string) => {
+        if (nameProduto === '') {
+            useProdutos.getState().getProdutos();
+            return;
+        }
+        
+        set({ produtos: useProdutos.getState().produtos.filter((produto: PropProdutos) => produto.name.toLowerCase().includes(nameProduto.toLowerCase())) })
+        console.log(nameProduto);
+    }
 }))

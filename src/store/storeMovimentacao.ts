@@ -6,6 +6,7 @@ interface PropUseMovimentacao {
     movimentacoes: PropsMoviementacoes[];
     getMovimentacoes: () => void;
     filtroMovimentacoes: (tipoMovimentacao: string) => void;
+    filtroNomeMovimentacao: (nameMovimentacao: string) => void
 }
 
 export const useMovimentacao = create<PropUseMovimentacao>((set) => ({
@@ -28,5 +29,13 @@ export const useMovimentacao = create<PropUseMovimentacao>((set) => ({
             .then((res) => {
                 set({ movimentacoes: res.data })
             })
-    }
+    },
+
+    filtroNomeMovimentacao: async (nameMovimentacao: string) => {
+        if (nameMovimentacao === '') {
+            useMovimentacao.getState().getMovimentacoes();
+            return;
+        }
+
+        set({ movimentacoes: useMovimentacao.getState().movimentacoes.filter((movimentacao: PropsMoviementacoes) => movimentacao.product.name.toLowerCase().includes(nameMovimentacao.toLowerCase())) })
 }));
