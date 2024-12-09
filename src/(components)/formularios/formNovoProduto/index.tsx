@@ -1,3 +1,4 @@
+'use client';
 import { useCallback, useEffect, useState } from "react";
 import { CampoButtons, CampoTexto, CampoTextoDuplo, ContainerForms, Quantidade } from "../styled";
 import { CategoriaProps } from "@/interfaces";
@@ -54,6 +55,9 @@ export default function FormsNovoProduto() {
         api.post('/products/', novoProduto)
             .then((res) => {
                 console.log(res.data);
+                if(res.status === 201){
+                    toast.success("Produto cadastrado com sucesso!");
+                }
             })
             .catch((err) => console.log(err));
     }, [nomeProduto, descricaoProduto, precoProduto, quantidade, categoriaSelecionada]);
@@ -86,7 +90,7 @@ export default function FormsNovoProduto() {
             </CampoTextoDuplo>
             <CampoTextoDuplo>
                 <CampoTexto>
-                    <label htmlFor="">Preço*</label>
+                    <label>Preço*</label>
                     <input
                         type="number-only"
                         placeholder="0.00"
@@ -94,7 +98,7 @@ export default function FormsNovoProduto() {
                     />
                 </CampoTexto>
                 <CampoTexto>
-                    <label htmlFor="">Quantidade</label>
+                    <label>Quantidade</label>
                     <Quantidade>
                         <button type="button" className="bi bi-dash" onClick={diminuirQuantidade} aria-label="Diminuir quantidade" />
                         <input
@@ -109,7 +113,7 @@ export default function FormsNovoProduto() {
                 </CampoTexto>
             </CampoTextoDuplo>
             <CampoTexto>
-                <label htmlFor="">Descrição</label>
+                <label>Descrição</label>
                 <textarea
                     placeholder="Descrição do produto"
                     onChange={(e) => setDescricaoProduto(e.target.value)}
