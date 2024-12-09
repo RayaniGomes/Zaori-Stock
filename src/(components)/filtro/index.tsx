@@ -25,12 +25,16 @@ export default function Filtro() {
             <ContainerFiltro>
                 <Left>
                     <Pesquisar>
-                        
-                        <input
+                        {isPageProdutos ? <input
                             type="search"
                             placeholder="Pesquisar.."
-                            onChange={(e) => {isPageProdutos ? useProdutos.getState().filterName(e.target.value) : fil(e.target.value)}
-                        />
+                            onChange={(e) => filterName(e.target.value)}
+                        /> : <input
+                        type="search"
+                        placeholder="Pesquisar.."
+                        onChange={(e) => filtroNomeMovimentacao(e.target.value)}
+                    />}
+                        
                         <button
                             className="bi bi-search"
                         />

@@ -5,6 +5,7 @@ import { create } from "zustand";
 
 interface PropUseProdutos {
     produtos: PropProdutos[];
+    copyProdutos: PropProdutos[];
     getProdutos: () => void;
     deleteItem: (id: number) => void;
     filtroCategoriaProdutos: (idCategoria: number) => void;
@@ -12,16 +13,20 @@ interface PropUseProdutos {
 }
 
 
-export const useProdutos= create<PropUseProdutos> ((set) => ({
+export const useProdutos = create<PropUseProdutos>((set) => ({
     produtos: [],
+    copyProdutos: [],
     getProdutos: async () => {
         await api.get('/products/')
             .then((res) => {
-                set({ produtos: res.data })
+                set({
+                    produtos: res.data,
+                    copyProdutos: res.data
+                })
             })
     },
 
-    deleteItem:(id: number) => {
+    deleteItem: (id: number) => {
         api.delete(`/products/${id}/`)
             .then((res) => {
                 if (res.status === 204) {
@@ -40,17 +45,15 @@ export const useProdutos= create<PropUseProdutos> ((set) => ({
 
         await api.get(`/products/?category=${idCategoria}`)
             .then((res) => {
-                set({ produtos: res.data })
+                set({ 
+                    produtos: res.data, 
+                    copyProdutos: res.data
+                })
             })
     },
 
     filterName: async (nameProduto: string) => {
-        if (nameProduto === '') {
-            useProdutos.getState().getProdutos();
-            return;
-        }
-        
-        set({ produtos: useProdutos.getState().produtos.filter((produto: PropProdutos) => produto.name.toLowerCase().includes(nameProduto.toLowerCase())) })
+        set({ produtos: useProdutos.getState().copyProdutos.filter((produto: PropProdutos) => produto.name.toLowerCase().includes(nameProduto.toLowerCase())) })
         console.log(nameProduto);
     }
 }))

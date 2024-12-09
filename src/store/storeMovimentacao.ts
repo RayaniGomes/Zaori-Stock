@@ -4,6 +4,7 @@ import { create } from "zustand";
 
 interface PropUseMovimentacao {
     movimentacoes: PropsMoviementacoes[];
+    copyMovimentacoes: PropsMoviementacoes[];
     getMovimentacoes: () => void;
     filtroMovimentacoes: (tipoMovimentacao: string) => void;
     filtroNomeMovimentacao: (nameMovimentacao: string) => void
@@ -11,11 +12,15 @@ interface PropUseMovimentacao {
 
 export const useMovimentacao = create<PropUseMovimentacao>((set) => ({
     movimentacoes: [],
+    copyMovimentacoes: [],
 
     getMovimentacoes: async () => {
         await api.get('/movements/')
             .then((res) => {
-                set({ movimentacoes: res.data })
+                set({
+                    movimentacoes: res.data,
+                    copyMovimentacoes: res.data
+                })
             })
     },
 
@@ -32,10 +37,6 @@ export const useMovimentacao = create<PropUseMovimentacao>((set) => ({
     },
 
     filtroNomeMovimentacao: async (nameMovimentacao: string) => {
-        if (nameMovimentacao === '') {
-            useMovimentacao.getState().getMovimentacoes();
-            return;
-        }
-
-        set({ movimentacoes: useMovimentacao.getState().movimentacoes.filter((movimentacao: PropsMoviementacoes) => movimentacao.product.name.toLowerCase().includes(nameMovimentacao.toLowerCase())) })
+        set({ movimentacoes: useMovimentacao.getState().copyMovimentacoes.filter((movimentacao: PropsMoviementacoes) => movimentacao.product.name.toLowerCase().includes(nameMovimentacao.toLowerCase())) })
+    }
 }));
