@@ -1,34 +1,20 @@
-import { PropProdutos, PropsMoviementacoes } from "@/interfaces";
-import { Tabela } from "./styled";
+import { PropProdutos } from "@/interfaces";
+import { ContainerMovimentacoes, Tabela } from "./styled";
 import { useEffect, useState } from "react";
-import api from "@/service/api";
-import { fomatarData } from "../tabelas/movimentacoes";
-import { ContainerMovimentacoes } from "@/app/styled";
 import ModalMovimentacao from "../modalMovimentacao";
+import { useMovimentacao } from "@/store/storeMovimentacao";
+import { fomatarData } from "@/formatacao";
 
 interface PropsInfoMov {
-    id: number;
     produto: PropProdutos;
 }
 
-export default function Movimentacoes({ id, produto }: PropsInfoMov) {
-    const [movimentacoes, setMovimentecoes] = useState<PropsMoviementacoes[]>([]);
+export default function Movimentacoes({ produto }: PropsInfoMov) {
+    const { movimentacoes, getIdProdtoMovimentacao } = useMovimentacao();
     const [showModal, setShowModal] = useState(false);
 
-    const getTnfoMovimentacoes = () => {
-        api.get(`/movements/`, {
-            params: {
-                product: id
-            }
-        })
-            .then((res) => {
-                setMovimentecoes(res.data);
-            })
-            .catch((err) => console.log(err));
-    }
-
     useEffect(() => {
-        getTnfoMovimentacoes();
+        getIdProdtoMovimentacao(produto.id);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
@@ -39,7 +25,6 @@ export default function Movimentacoes({ id, produto }: PropsInfoMov) {
     const handleClose = () => setShowModal(false);
 
     return (
-
         <ContainerMovimentacoes >
             <div className="d-flex align-items-center gap-3 mb-4">
                 <h3>Movimentação do produto</h3>
@@ -64,11 +49,12 @@ export default function Movimentacoes({ id, produto }: PropsInfoMov) {
                     ))}
                 </tbody>
             </Tabela>
+            
             <ModalMovimentacao
                 produto={produto}
                 handleClose={handleClose}
                 show={showModal}
-                getProdutos={getTnfoMovimentacoes}
+                getProdutos={() => getIdProdtoMovimentacao(produto.id)}
             />
         </ContainerMovimentacoes>
     );

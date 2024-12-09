@@ -4,9 +4,9 @@ import { SectionTabela } from "../styled";
 import { useEffect, useState } from "react";
 import { PropProdutos } from "@/interfaces";
 import Link from "next/link";
-import { formatter } from "../movimentacoes";
 import ModalMovimentacao from "@/(components)/modalMovimentacao";
 import { useProdutos } from "@/store/storeProdutos";
+import { formatter } from "@/formatacao";
 
 export default function Tabela() {
     const { produtos, getProdutos, deleteItem } = useProdutos();

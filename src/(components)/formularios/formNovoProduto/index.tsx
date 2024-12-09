@@ -117,7 +117,6 @@ export default function FormsNovoProduto() {
             </CampoTexto>
             <CampoButtons>
                 <button className="bntPrincipal">Cadastrar</button>
-                <button className="bntSecondario">Cancelar</button>
             </CampoButtons>
         </ContainerForms >
     )

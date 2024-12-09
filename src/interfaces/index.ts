@@ -20,3 +20,29 @@ export interface CategoriaProps {
     id: number;
     name: string;
 }
+
+export interface ModalProps {
+    handleClose: () => void;
+    getProdutos?: () => void;
+    show: boolean;
+    produto: PropProdutos
+}
+
+export interface PropUseProdutos {
+    produtos: PropProdutos[];
+    copyProdutos: PropProdutos[];
+    getProdutos: () => void;
+    deleteItem: (id: number) => void;
+    filtroCategoriaProdutos: (idCategoria: number) => void;
+    filterName: (nameProduto: string) => void
+    getInfoProduto: (id: number) => void
+}
+
+export interface PropUseMovimentacao {
+    movimentacoes: PropsMoviementacoes[];
+    copyMovimentacoes: PropsMoviementacoes[];
+    getMovimentacoes: () => void;
+    filtroMovimentacoes: (tipoMovimentacao: string) => void;
+    filtroNomeMovimentacao: (nameMovimentacao: string) => void;
+    getIdProdtoMovimentacao: (id: number) => void
+}

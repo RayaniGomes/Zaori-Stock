@@ -50,6 +50,7 @@ export const SectionTabela = styled.section`
 
             tr {
                 display: flex;
+                align-items: center;
                 justify-content: space-between;
                 border-bottom: 1px solid #3B36334D;
                 padding: 0 1rem;

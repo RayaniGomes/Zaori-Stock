@@ -2,16 +2,9 @@ import Modal from 'react-bootstrap/Modal';
 import { CampoButtons, CampoTexto, CampoTextoDuplo, Quantidade } from '../formularios/styled';
 import { useCallback, useState } from 'react';
 import api from '@/service/api';
-import { PropProdutos } from '@/interfaces';
+import { ModalProps } from '@/interfaces';
 import { toast } from 'react-toastify';
 import { Form } from 'react-bootstrap';
-
-interface ModalProps {
-    handleClose: () => void;
-    getProdutos?: () => void;
-    show: boolean;
-    produto: PropProdutos
-}
 
 export default function ModalMovimentacao({ produto, handleClose, show, getProdutos = () => { } }: ModalProps) {
     const [nomeProduto, setNomeProduto] = useState('');
@@ -27,16 +20,15 @@ export default function ModalMovimentacao({ produto, handleClose, show, getProdu
             return;
         }
 
-        if ((tipoMov === 'IN' && razao !== 'Devolucao')){
+        if ((tipoMov === 'IN' && razao !== 'Devolucao')) {
             toast.error(`Movimentação inválida. Para a movimentação ENTRADA a razão deve ser DEVOLUCAO`);
             return;
         }
 
         if ((tipoMov === 'OUT' && !['Descarte', 'Venda'].includes(razao))) {
-                toast.error(`Movimentação inválida. Para a movimentação SAIDA a razão deve ser DESCARTE ou VENDA`);
+            toast.error(`Movimentação inválida. Para a movimentação SAIDA a razão deve ser DESCARTE ou VENDA`);
             return;
         }
-
 
         const novaMov = {
             product: produto.id,

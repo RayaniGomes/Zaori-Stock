@@ -14,7 +14,6 @@ export default function Informacoes(props: { params: Params }) {
     const urlParams = use(props.params);
     const [produto, setProduto] = useState<PropProdutos>({} as PropProdutos);
     
-
     const getInformacoes = () => {
         api.get(`/products/${urlParams?.id}/`)
             .then((res) => {
@@ -40,7 +39,7 @@ export default function Informacoes(props: { params: Params }) {
                             <FormsEditarProduto produto={produto} />
                         </div>
                         <div className="col">
-                                <Movimentacoes produto={produto} id={Number(urlParams?.id)} />
+                                <Movimentacoes produto={produto} />
                         </div>
                     </ContainerBody>
                 </ContainerMain>

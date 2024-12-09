@@ -14,18 +14,16 @@ export default function CategoriaDropdown() {
             .then((res) => res.data)
             .then((data) => setCategorias(data));
     }, []);
-    
+
     return (
-        <>
-            <NavDropdown
-                id="nav-dropdown-dark-example"
-                title={`Categoria ${categoiriaSelected !== '' ? ('- ' + categoiriaSelected) : ''}`}
-            >
-                <NavDropdown.Item onClick={() => {filtroCategoriaProdutos(0); setCategoiriaSelected('') }}>Todas</NavDropdown.Item>
-                {categorias.map((categoria) => (
-                    <NavDropdown.Item onClick={() => {filtroCategoriaProdutos(categoria.id); setCategoiriaSelected(categoria.name)}} key={categoria.id}>{categoria.name}</NavDropdown.Item>
-                ))}
-            </NavDropdown>
-        </>
+        <NavDropdown
+            id="nav-dropdown-dark-example"
+            title={`Categoria ${categoiriaSelected !== '' ? ('- ' + categoiriaSelected) : ''}`}
+        >
+            <NavDropdown.Item onClick={() => { filtroCategoriaProdutos(0); setCategoiriaSelected('') }}>Todas</NavDropdown.Item>
+            {categorias.map((categoria) => (
+                <NavDropdown.Item onClick={() => { filtroCategoriaProdutos(categoria.id); setCategoiriaSelected(categoria.name) }} key={categoria.id}>{categoria.name}</NavDropdown.Item>
+            ))}
+        </NavDropdown>
     )
 }

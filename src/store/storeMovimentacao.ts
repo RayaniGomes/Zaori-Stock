@@ -1,14 +1,6 @@
-import { PropsMoviementacoes } from "@/interfaces";
+import { PropsMoviementacoes, PropUseMovimentacao } from "@/interfaces";
 import api from "@/service/api";
 import { create } from "zustand";
-
-interface PropUseMovimentacao {
-    movimentacoes: PropsMoviementacoes[];
-    copyMovimentacoes: PropsMoviementacoes[];
-    getMovimentacoes: () => void;
-    filtroMovimentacoes: (tipoMovimentacao: string) => void;
-    filtroNomeMovimentacao: (nameMovimentacao: string) => void
-}
 
 export const useMovimentacao = create<PropUseMovimentacao>((set) => ({
     movimentacoes: [],
@@ -24,6 +16,19 @@ export const useMovimentacao = create<PropUseMovimentacao>((set) => ({
             })
     },
 
+    getIdProdtoMovimentacao: async (id: number) => {
+        await api.get(`/movements/`, {
+            params: {
+                product: id
+            }
+        })
+            .then((res) => {
+                set({
+                    movimentacoes: res.data,
+                })
+            })
+    },
+
     filtroMovimentacoes: async (tipoMovimentacao: string) => {
         if (tipoMovimentacao === 'Todas') {
             useMovimentacao.getState().getMovimentacoes();
@@ -32,7 +37,10 @@ export const useMovimentacao = create<PropUseMovimentacao>((set) => ({
 
         await api.get(`/movements/?movement_type=${tipoMovimentacao}`)
             .then((res) => {
-                set({ movimentacoes: res.data })
+                set({
+                    movimentacoes: res.data,
+                    copyMovimentacoes: res.data
+                })
             })
     },
 

@@ -10,7 +10,6 @@ export default function Navbar() {
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
     };
-    
 
     return (
         <Nav>
@@ -23,7 +22,6 @@ export default function Navbar() {
                     priority 
                 />
             </Logo>
-
             <Menu className={isMenuOpen ? 'open' : ''}>
                 <Link href="/">
                     <i className="bi bi-grid" />
@@ -38,7 +36,6 @@ export default function Navbar() {
                     Novo Produto
                 </Link>
             </Menu>
-            
             <ButtonMenuHamburger className={isMenuOpen ? 'bi bi-x' : 'bi bi-list'} onClick={toggleMenu} />
         </Nav>
     )    

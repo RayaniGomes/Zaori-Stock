@@ -1,17 +1,7 @@
-import { PropProdutos } from "@/interfaces";
+import { PropProdutos, PropUseProdutos } from "@/interfaces";
 import api from "@/service/api";
 import { toast } from "react-toastify";
 import { create } from "zustand";
-
-interface PropUseProdutos {
-    produtos: PropProdutos[];
-    copyProdutos: PropProdutos[];
-    getProdutos: () => void;
-    deleteItem: (id: number) => void;
-    filtroCategoriaProdutos: (idCategoria: number) => void;
-    filterName: (nameProduto: string) => void
-}
-
 
 export const useProdutos = create<PropUseProdutos>((set) => ({
     produtos: [],
@@ -22,6 +12,15 @@ export const useProdutos = create<PropUseProdutos>((set) => ({
                 set({
                     produtos: res.data,
                     copyProdutos: res.data
+                })
+            })
+    },
+
+    getInfoProduto: async (id: number) => {
+        await api.get(`/products/${id}/`)
+            .then((res) => {
+                set({
+                    produtos: res.data,
                 })
             })
     },

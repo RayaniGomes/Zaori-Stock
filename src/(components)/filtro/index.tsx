@@ -21,31 +21,30 @@ export default function Filtro() {
     }, [window.location.pathname]);
 
     return (
-        <>
-            <ContainerFiltro>
-                <Left>
-                    <Pesquisar>
-                        {isPageProdutos ? <input
+        <ContainerFiltro>
+            <Left>
+                <Pesquisar>
+                    {isPageProdutos
+                        ? <input
                             type="search"
                             placeholder="Pesquisar.."
                             onChange={(e) => filterName(e.target.value)}
-                        /> : <input
-                        type="search"
-                        placeholder="Pesquisar.."
-                        onChange={(e) => filtroNomeMovimentacao(e.target.value)}
-                    />}
-                        
-                        <button
-                            className="bi bi-search"
                         />
-                    </Pesquisar>
-
-                    {isPageProdutos ? <CategoriaDropdown /> : <MovimentacaoDropdown />}
-                </Left>
-                <a href="/cadastrar" className="bntPrincipal">
-                    Novo produto
-                </a>
-            </ContainerFiltro>
-        </>
+                        : <input
+                            type="search"
+                            placeholder="Pesquisar.."
+                            onChange={(e) => filtroNomeMovimentacao(e.target.value)}
+                        />
+                    }
+                    <button
+                        className="bi bi-search"
+                    />
+                </Pesquisar>
+                {isPageProdutos ? <CategoriaDropdown /> : <MovimentacaoDropdown />}
+            </Left>
+            <a href="/cadastrar" className="bntPrincipal">
+                Novo produto
+            </a>
+        </ContainerFiltro>
     );
 }
